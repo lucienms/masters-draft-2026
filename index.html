@@ -56,22 +56,13 @@
   .u{color:#c0392b;font-weight:600;} .o{color:#555;font-weight:500;} .ev{color:var(--green-mid);font-weight:600;}
   .badge{display:inline-block;padding:2px 6px;border-radius:3px;font-size:10px;font-weight:600;margin-left:4px;vertical-align:middle;color:#fff;}
 
-  /* position group dividers — green above red line, grey below */
+  /* position group dividers */
   .lb tbody tr.grp-border-scoring td{border-bottom:3px solid var(--green-mid);}
   .lb tbody tr.grp-border-nonscoring td{border-bottom:3px solid rgba(26,71,49,0.25);}
   .lb tbody tr.grp-border-red td{border-bottom:3px solid var(--red);}
 
   /* projected cut row */
-  .proj-cut-row td{
-    background:rgba(192,57,43,0.1);
-    color:var(--red);
-    font-weight:700;
-    font-size:12px;
-    letter-spacing:0.06em;
-    padding:5px 10px;
-    text-align:center;
-    border-bottom:none;
-  }
+  .proj-cut-row td{background:rgba(192,57,43,0.1);color:var(--red);font-weight:700;font-size:12px;letter-spacing:0.06em;padding:5px 10px;text-align:center;border-bottom:none;}
   .lb tbody tr.proj-cut-row:nth-child(even){background:rgba(192,57,43,0.1);}
   .lb tbody tr.proj-cut-row:hover{background:rgba(192,57,43,0.15)!important;}
 
@@ -79,40 +70,55 @@
   .cut-div td{background:rgba(192,57,43,0.08);padding:4px 10px;font-size:10px;font-weight:700;color:#c0392b;letter-spacing:0.1em;text-transform:uppercase;}
   .cut-row{opacity:0.5;}
 
-  /* undrafted pts — greyed italic */
+  /* undrafted pts */
   .pts-undrafted{color:var(--muted);font-style:italic;font-weight:400;}
 
   .legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;align-items:center;font-size:11px;color:var(--muted);}
   .lsw{width:11px;height:11px;border-radius:2px;display:inline-block;margin-right:3px;vertical-align:middle;}
 
   /* DRAFT LEADERBOARD */
-  .dlb{display:flex;flex-direction:column;gap:6px;}
-  .drow{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:11px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all 0.18s;}
+  .dlb{display:flex;flex-direction:column;gap:8px;}
+  .drow{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;transition:all 0.18s;}
   .drow:hover{border-color:var(--green-light);box-shadow:0 2px 8px rgba(26,71,49,0.1);}
+  .drow-header{padding:11px 14px;display:flex;align-items:center;gap:12px;}
   .drank{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;width:34px;flex-shrink:0;text-align:center;}
   .r1c{color:var(--gold);} .r2c{color:#8a8a8a;} .r3c{color:#a0623a;} .rnc{color:var(--green);}
   .dname{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--green);}
-  .dmini{font-size:11px;color:var(--muted);margin-top:1px;}
   .dpts{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;min-width:55px;text-align:right;}
   .dpts-lbl{font-size:10px;color:var(--muted);text-align:right;letter-spacing:0.06em;text-transform:uppercase;}
+  /* draft player list within each team row */
+  .dplayers{border-top:1px solid var(--border);}
+  .dplayer-row{display:flex;align-items:center;padding:5px 14px;border-bottom:1px solid var(--border);font-size:12px;gap:8px;}
+  .dplayer-row:last-child{border-bottom:none;}
+  .dplayer-pos{width:36px;flex-shrink:0;font-weight:600;color:var(--green);font-size:11px;}
+  .dplayer-name{flex:1;font-weight:500;}
+  .dplayer-name.safe{color:var(--green-mid);font-weight:600;}
+  .dplayer-name.cut{color:var(--red);}
+  .dplayer-name.ns{color:var(--dark);}
+  .dplayer-score{min-width:30px;text-align:right;font-size:11px;font-weight:600;}
+  .dplayer-pts{min-width:34px;text-align:right;font-family:'Playfair Display',serif;font-weight:700;font-size:13px;}
+  .asterisk-note{font-size:11px;color:var(--muted);margin-bottom:8px;font-style:italic;}
 
   /* TEAMS */
-  .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;}
+  .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;}
   .tcard{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
   .tcard-hdr{padding:9px 13px;display:flex;align-items:center;justify-content:space-between;}
   .tcard-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:#fff;}
   .tcard-pts{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:rgba(255,255,255,0.92);}
   .tcard-pts span{font-size:11px;color:rgba(255,255,255,0.5);margin-left:2px;}
-  .tprow{display:flex;align-items:center;padding:7px 13px;border-bottom:1px solid var(--border);gap:7px;font-size:13px;}
+  .tprow{display:flex;align-items:center;padding:7px 13px;border-bottom:1px solid var(--border);gap:7px;font-size:12px;}
   .tprow:last-child{border-bottom:none;}
   .tprow.mc-row{opacity:0.5;}
   .pick{font-size:10px;width:28px;flex-shrink:0;text-align:center;background:var(--cream-dark);border-radius:3px;padding:2px 0;font-weight:600;color:var(--muted);}
   .tpname{flex:1;font-weight:500;}
-  .tppos{font-size:12px;min-width:52px;}
-  .tpscore{font-size:12px;font-weight:600;min-width:34px;text-align:right;}
-  .tppts{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;min-width:34px;text-align:right;}
+  .tpname.safe{color:var(--green-mid);font-weight:600;}
+  .tpname.missed{color:var(--red);}
+  .tppos{font-size:11px;min-width:38px;color:var(--muted);}
+  .tpthru{font-size:11px;min-width:30px;text-align:center;color:var(--muted);}
+  .tpscore{font-size:12px;font-weight:600;min-width:30px;text-align:right;}
+  .tppts{font-family:'Playfair Display',serif;font-weight:700;font-size:13px;min-width:32px;text-align:right;}
 
-  /* HOW TO UPDATE */
+  /* SETUP */
   .setup-box{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px;}
   .setup-box h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--green);margin-bottom:12px;}
   .step{display:flex;gap:12px;margin-bottom:16px;align-items:flex-start;}
@@ -121,15 +127,12 @@
   .step-body{flex:1;font-size:13px;color:var(--muted);line-height:1.65;}
   .step-body strong{color:var(--dark);}
   .step-body a{color:var(--green-mid);font-weight:600;}
-  .step-body .sheet-link{color:var(--green-mid);font-weight:600;word-break:break-all;}
   .step-img{margin-top:10px;border:1px solid var(--border);border-radius:6px;overflow:hidden;max-width:100%;}
   .step-img img{width:100%;display:block;}
   .pmsg{font-size:12px;margin-left:4px;}
   .ok{color:var(--green-mid);} .err{color:#c0392b;}
   .sheet-url-row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap;}
   .sheet-url-row input{flex:1;min-width:200px;border:1px solid var(--border);border-radius:4px;padding:8px 10px;font-size:12px;font-family:monospace;background:var(--cream);color:var(--dark);}
-  .sheet-url-row input:focus{outline:1px solid var(--green-light);}
-  .sheet-link-display{font-size:12px;font-family:monospace;color:var(--green-mid);font-weight:600;word-break:break-all;background:var(--cream-dark);padding:8px 10px;border-radius:4px;margin-top:8px;display:block;}
 
   .info-box{background:#fffce6;border:1px solid #e8c84c;border-radius:6px;padding:12px 16px;font-size:12px;color:#6b5000;line-height:1.6;margin-bottom:14px;}
   .info-box strong{color:#4a3700;}
@@ -179,6 +182,7 @@
   <!-- DRAFT LB -->
   <div class="panel" id="panel-draft">
     <div class="stitle"><div class="dot"></div>Draft Leaderboard</div>
+    <div class="asterisk-note" id="asteriskNote" style="display:none">* Player has not yet started the current round</div>
     <div id="draftContent"><div class="loading">No data yet.</div></div>
   </div>
 
@@ -217,7 +221,7 @@
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
-          <strong>Paste into cell A2.</strong> Click on cell A2 and paste (Ctrl+V / Cmd+V). The data will paste into columns A onwards, but the first player row (row 2) will be one column to the left of where it should be. To fix this: click on cell A2, then cut it (Ctrl+X / Cmd+X) and paste it into cell B2 (Ctrl+V / Cmd+V). All rows from row 3 downwards will already be in the correct columns. Note: if round 2 is in progress, the projected cut line will paste in automatically — there is no need to delete it, as the app handles it.
+          <strong>Paste into cell A2.</strong> Click on cell A2 and paste (Ctrl+V / Cmd+V). The data will paste with the first row (row 2, columns A to K) one column to the left of where it should be. To fix this: select all cells from A2 to K2, cut them (Ctrl+X / Cmd+X), then click cell B2 and paste (Ctrl+V / Cmd+V). All rows from row 3 downwards will already be in the correct columns. Note: if round 2 is in progress, the projected cut line will paste in automatically — there is no need to delete it.
         </div>
       </div>
 
@@ -239,7 +243,7 @@
       <div style="margin-top:14px">
         <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Published CSV URL (admin only — to reconnect if needed):</div>
         <div class="sheet-url-row">
-          <input type="text" id="sheetUrl" placeholder="Paste published CSV URL here if reconnecting…" value="https://docs.google.com/spreadsheets/d/e/2PACX-1vSU1qW-7kdt13BZaZ5O87DLGyPg-YnXvEevlBWWlgczthe5_zsQGYtB9FgfIp6LQ3lk5GLmDyvdlkmf/pub?gid=0&single=true&output=csv" readonly />
+          <input type="text" id="sheetUrl" value="https://docs.google.com/spreadsheets/d/e/2PACX-1vSU1qW-7kdt13BZaZ5O87DLGyPg-YnXvEevlBWWlgczthe5_zsQGYtB9FgfIp6LQ3lk5GLmDyvdlkmf/pub?gid=0&single=true&output=csv" readonly />
           <button class="btn-gold" onclick="unlockAndReconnect()">Reconnect</button>
           <span class="pmsg" id="connectMsg"></span>
         </div>
@@ -253,217 +257,207 @@
 // ── TEAMS ─────────────────────────────────────────────────────────────────────
 const TEAMS = [
   {name:"Jack", players:[
-    {name:"Scottie Scheffler",pick:"1.1"}, {name:"Brooks Koepka",pick:"2.9"},
-    {name:"Akshay Bhatia",pick:"3.1"},     {name:"Sepp Straka",pick:"4.9"},
-    {name:"Harris English",pick:"5.1"},    {name:"Michael Kim",pick:"6.9"}
+    {name:"Scottie Scheffler",pick:"1.1"},{name:"Brooks Koepka",pick:"2.9"},
+    {name:"Akshay Bhatia",pick:"3.1"},{name:"Sepp Straka",pick:"4.9"},
+    {name:"Harris English",pick:"5.1"},{name:"Michael Kim",pick:"6.9"}
   ]},
   {name:"Harry", players:[
-    {name:"Jon Rahm",pick:"1.2"},          {name:"Collin Morikawa",pick:"2.8"},
-    {name:"Jordan Spieth",pick:"3.2"},     {name:"Nicolai Højgaard",pick:"4.8"},
-    {name:"Cam Smith",pick:"5.2"},         {name:"Ryan Fox",pick:"6.8"}
+    {name:"Jon Rahm",pick:"1.2"},{name:"Collin Morikawa",pick:"2.8"},
+    {name:"Jordan Spieth",pick:"3.2"},{name:"Nicolai Højgaard",pick:"4.8"},
+    {name:"Cam Smith",pick:"5.2"},{name:"Ryan Fox",pick:"6.8"}
   ]},
   {name:"Luc", players:[
-    {name:"Bryson DeChambeau",pick:"1.3"}, {name:"Min Woo Lee",pick:"2.7"},
-    {name:"Chris Gotterup",pick:"3.3"},    {name:"Jake Knapp",pick:"4.7"},
-    {name:"Maverick McNealy",pick:"5.3"},  {name:"Ryan Gerard",pick:"6.7"}
+    {name:"Bryson DeChambeau",pick:"1.3"},{name:"Min Woo Lee",pick:"2.7"},
+    {name:"Chris Gotterup",pick:"3.3"},{name:"Jake Knapp",pick:"4.7"},
+    {name:"Maverick McNealy",pick:"5.3"},{name:"Ryan Gerard",pick:"6.7"}
   ]},
   {name:"Peter", players:[
-    {name:"Xander Schauffele",pick:"1.4"}, {name:"Russell Henley",pick:"2.6"},
-    {name:"Corey Conners",pick:"3.4"},     {name:"Jacob Bridgeman",pick:"4.6"},
-    {name:"Casey Jarvis",pick:"5.4"},      {name:"Ben Griffin",pick:"6.6"}
+    {name:"Xander Schauffele",pick:"1.4"},{name:"Russell Henley",pick:"2.6"},
+    {name:"Corey Conners",pick:"3.4"},{name:"Jacob Bridgeman",pick:"4.6"},
+    {name:"Casey Jarvis",pick:"5.4"},{name:"Ben Griffin",pick:"6.6"}
   ]},
   {name:"Fraser", players:[
-    {name:"Rory McIlroy",pick:"1.5"},      {name:"Si Woo Kim",pick:"2.5"},
-    {name:"Tyrrell Hatton",pick:"3.5"},    {name:"Brian Harman",pick:"4.5"},
-    {name:"Jason Day",pick:"5.5"},         {name:"Harry Hall",pick:"6.5"}
+    {name:"Rory McIlroy",pick:"1.5"},{name:"Si Woo Kim",pick:"2.5"},
+    {name:"Tyrrell Hatton",pick:"3.5"},{name:"Brian Harman",pick:"4.5"},
+    {name:"Jason Day",pick:"5.5"},{name:"Harry Hall",pick:"6.5"}
   ]},
   {name:"Josh", players:[
-    {name:"Matt Fitzpatrick",pick:"1.6"},  {name:"Hideki Matsuyama",pick:"2.4"},
-    {name:"Max Homa",pick:"3.6"},          {name:"Sam Burns",pick:"4.4"},
-    {name:"Rasmus Højgaard",pick:"5.6"},   {name:"Aaron Rai",pick:"6.4"}
+    {name:"Matt Fitzpatrick",pick:"1.6"},{name:"Hideki Matsuyama",pick:"2.4"},
+    {name:"Max Homa",pick:"3.6"},{name:"Sam Burns",pick:"4.4"},
+    {name:"Rasmus Højgaard",pick:"5.6"},{name:"Aaron Rai",pick:"6.4"}
   ]},
   {name:"Conor", players:[
-    {name:"Tommy Fleetwood",pick:"1.7"},   {name:"Justin Rose",pick:"2.3"},
-    {name:"Shane Lowry",pick:"3.7"},       {name:"Justin Thomas",pick:"4.3"},
-    {name:"Kurt Kitayama",pick:"5.7"},     {name:"Daniel Berger",pick:"6.3"}
+    {name:"Tommy Fleetwood",pick:"1.7"},{name:"Justin Rose",pick:"2.3"},
+    {name:"Shane Lowry",pick:"3.7"},{name:"Justin Thomas",pick:"4.3"},
+    {name:"Kurt Kitayama",pick:"5.7"},{name:"Daniel Berger",pick:"6.3"}
   ]},
   {name:"Dave", players:[
-    {name:"Ludvig Aberg",pick:"1.8"},      {name:"Patrick Reed",pick:"2.2"},
-    {name:"Viktor Hovland",pick:"3.8"},    {name:"Sungjae Im",pick:"4.2"},
-    {name:"JJ Spaun",pick:"5.8"},          {name:"Samuel Stevens",pick:"6.2"}
+    {name:"Ludvig Aberg",pick:"1.8"},{name:"Patrick Reed",pick:"2.2"},
+    {name:"Viktor Hovland",pick:"3.8"},{name:"Sungjae Im",pick:"4.2"},
+    {name:"JJ Spaun",pick:"5.8"},{name:"Samuel Stevens",pick:"6.2"}
   ]},
   {name:"Joel", players:[
-    {name:"Cameron Young",pick:"1.9"},     {name:"Robert MacIntyre",pick:"2.1"},
-    {name:"Adam Scott",pick:"3.9"},        {name:"Patrick Cantlay",pick:"4.1"},
-    {name:"Marco Penge",pick:"5.9"},       {name:"Gary Woodland",pick:"6.1"}
+    {name:"Cameron Young",pick:"1.9"},{name:"Robert MacIntyre",pick:"2.1"},
+    {name:"Adam Scott",pick:"3.9"},{name:"Patrick Cantlay",pick:"4.1"},
+    {name:"Marco Penge",pick:"5.9"},{name:"Gary Woodland",pick:"6.1"}
   ]}
 ];
 
-const TC = ["#1a4731","#2d6a4f","#6b7c3a","#c9a84c","#a0623a","#3a6b7c","#6b3a7c","#7c3a3a","#3a4a7c"];
-const PTS = {1:16,2:13,3:11,4:9,5:8,6:7,7:6,8:5,9:4,10:3,11:2,12:2,13:2,14:2,15:2};
-const MAX_PTS_POS = 15;
+const TC=["#1a4731","#2d6a4f","#6b7c3a","#c9a84c","#a0623a","#3a6b7c","#6b3a7c","#7c3a3a","#3a4a7c"];
+const PTS={1:16,2:13,3:11,4:9,5:8,6:7,7:6,8:5,9:4,10:3,11:2,12:2,13:2,14:2,15:2};
+const MAX_PTS_POS=15;
 
-let liveData = [];       // player rows
-let projCutText = null;  // projected cut string if present, e.g. "Projected Cut: +3"
-let projCutScore = null; // numeric score of projected cut, e.g. 3
-let playerMap = {};
-let lastLoaded = null;
-let isConnected = false;
-let PUBLISHED_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSU1qW-7kdt13BZaZ5O87DLGyPg-YnXvEevlBWWlgczthe5_zsQGYtB9FgfIp6LQ3lk5GLmDyvdlkmf/pub?gid=0&single=true&output=csv";
+let liveData=[], projCutText=null, projCutScore=null, playerMap={};
+let lastLoaded=null, isConnected=false;
+let PUBLISHED_CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vSU1qW-7kdt13BZaZ5O87DLGyPg-YnXvEevlBWWlgczthe5_zsQGYtB9FgfIp6LQ3lk5GLmDyvdlkmf/pub?gid=0&single=true&output=csv";
 
 // Screenshot loader
-(async function loadScreenshot() {
-  try {
-    const img = document.getElementById('screenshotImg');
-    const placeholder = document.getElementById('screenshotPlaceholder');
-    img.src = 'espn-screenshot.jpeg';
-    img.onload = () => { img.style.display = 'block'; placeholder.style.display = 'none'; };
-  } catch(e) {}
+(async function(){
+  try{
+    const img=document.getElementById('screenshotImg');
+    img.src='espn-screenshot.jpeg';
+    img.onload=()=>{img.style.display='block';document.getElementById('screenshotPlaceholder').style.display='none';};
+  }catch(e){}
 })();
 
 // ── UTILS ─────────────────────────────────────────────────────────────────────
-function normStr(s) {
-  return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
-}
-function lname(n) { const p = normStr(n).split(' '); return p[p.length-1]; }
+function normStr(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();}
+function lname(n){const p=normStr(n).split(' ');return p[p.length-1];}
 
-function isDrafted(liveName) {
-  const nl = lname(liveName), nn = normStr(liveName);
-  return TEAMS.some(t => t.players.some(p => normStr(p.name)===nn || lname(p.name)===nl));
+// Is a thru value a time (not-yet-started)? Format: "HH:MM"
+function isTime(thru){return /^\d{1,2}:\d{2}/.test((thru||'').trim());}
+
+// Cut status for a player given projCutScore
+// Returns 'safe' | 'cut' | 'unknown'
+function cutStatus(p){
+  if(p.cut) return 'cut';
+  if(projCutScore===null) return 'unknown';
+  if(p.total===null) return 'unknown';
+  // Players AT or ABOVE (lower score) the cut score survive
+  return p.total <= projCutScore ? 'safe' : 'cut';
+}
+
+function isDrafted(liveName){
+  const nl=lname(liveName),nn=normStr(liveName);
+  return TEAMS.some(t=>t.players.some(p=>normStr(p.name)===nn||lname(p.name)===nl));
 }
 
 // ── TABS ──────────────────────────────────────────────────────────────────────
-function showPanel(id, btn) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+function showPanel(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
-  if (btn) btn.classList.add('active');
+  if(btn) btn.classList.add('active');
 }
 
 // ── SCORING ───────────────────────────────────────────────────────────────────
-function calcPts(pos, tc) {
-  if (!pos || pos > MAX_PTS_POS) return 0;
-  if (!tc || tc <= 1) return PTS[pos] || 0;
-  let s = 0, n = 0;
-  for (let i = pos; i < pos + tc && i <= MAX_PTS_POS; i++) { s += (PTS[i]||0); n++; }
-  return n ? s / n : 0;
+function calcPts(pos,tc){
+  if(!pos||pos>MAX_PTS_POS) return 0;
+  if(!tc||tc<=1) return PTS[pos]||0;
+  let s=0,n=0;
+  for(let i=pos;i<pos+tc&&i<=MAX_PTS_POS;i++){s+=(PTS[i]||0);n++;}
+  return n?s/n:0;
 }
 
-function buildMap(arr) {
-  const pg = {};
-  arr.forEach(p => { if (p.pos && !p.cut) pg[p.pos] = (pg[p.pos]||0)+1; });
-  const m = {};
-  arr.forEach(p => {
-    const tc = pg[p.pos]||1;
-    const pp = p.cut ? 0 : calcPts(p.pos, tc);
-    const cb = (!p.cut && p.madecut) ? 1 : 0;
-    m[normStr(p.name)] = {...p, posPts:pp, cutBonus:cb, draftPts:Math.round((pp+cb)*100)/100};
+function buildMap(arr){
+  const pg={};
+  arr.forEach(p=>{if(p.pos&&!p.cut) pg[p.pos]=(pg[p.pos]||0)+1;});
+  const m={};
+  arr.forEach(p=>{
+    const tc=pg[p.pos]||1;
+    const pp=p.cut?0:calcPts(p.pos,tc);
+    const cb=(!p.cut&&p.madecut)?1:0;
+    m[normStr(p.name)]={...p,posPts:pp,cutBonus:cb,draftPts:Math.round((pp+cb)*100)/100};
   });
   return m;
 }
 
 // ── NAME MATCHING ─────────────────────────────────────────────────────────────
-function matchP(draftName, arr) {
-  const dn = normStr(draftName), dnL = lname(draftName);
-  let m = arr.find(p => normStr(p.name) === dn); if (m) return m;
-  m = arr.find(p => lname(p.name) === dnL); if (m) return m;
-  m = arr.find(p => normStr(p.name).includes(dnL) || dn.includes(lname(p.name)));
-  return m || null;
+function matchP(draftName,arr){
+  const dn=normStr(draftName),dnL=lname(draftName);
+  let m=arr.find(p=>normStr(p.name)===dn); if(m) return m;
+  m=arr.find(p=>lname(p.name)===dnL); if(m) return m;
+  m=arr.find(p=>normStr(p.name).includes(dnL)||dn.includes(lname(p.name)));
+  return m||null;
 }
 
-function getDraftTeams(liveName) {
-  const res = [];
-  TEAMS.forEach((t,ti) => {
-    t.players.forEach(tp => {
-      const lm = matchP(tp.name, liveData);
-      if (lm && normStr(lm.name) === normStr(liveName))
-        res.push({teamName:t.name, ti, pick:tp.pick});
+function getDraftTeams(liveName){
+  const res=[];
+  TEAMS.forEach((t,ti)=>{
+    t.players.forEach(tp=>{
+      const lm=matchP(tp.name,liveData);
+      if(lm&&normStr(lm.name)===normStr(liveName))
+        res.push({teamName:t.name,ti,pick:tp.pick});
     });
   });
   return res;
 }
 
 // ── CSV PARSING ───────────────────────────────────────────────────────────────
-// New sheet layout: Col A = projected cut merged row (when present) or empty
-// Player data starts at col B: Pos, N/A, Name, Total, Today, Thru, R1, R2, R3, R4, TotalShots
-// i.e. cols[1]=Pos, cols[2]=N/A, cols[3]=Name, cols[4]=Total, cols[5]=Today,
-//      cols[6]=Thru, cols[7]=R1, cols[8]=R2, cols[9]=R3, cols[10]=R4
-function parseCSV(text) {
-  const lines = text.trim().split('\n').filter(l => l.trim());
-  if (!lines.length) return [];
+// Layout: col A = proj cut merged row (when present) or empty
+// Player cols: B=Pos, C=N/A, D=Name, E=Total, F=Today, G=Thru, H=R1, I=R2, J=R3, K=R4
+function parseCSV(text){
+  const lines=text.trim().split('\n').filter(l=>l.trim());
+  if(!lines.length) return [];
+  const rows=[];
+  projCutText=null; projCutScore=null;
+  const startIdx=lines[0].toLowerCase().includes('name')||lines[0].toLowerCase().includes('pos')?1:0;
 
-  const rows = [];
-  projCutText = null;
-  projCutScore = null;
+  for(let i=startIdx;i<lines.length;i++){
+    const cols=parseCSVLine(lines[i]);
+    const colA=(cols[0]||'').trim();
+    const colB=(cols[1]||'').trim();
 
-  // Skip header row if first line contains 'pos' or 'name'
-  const startIdx = lines[0].toLowerCase().includes('name') || lines[0].toLowerCase().includes('pos') ? 1 : 0;
-
-  for (let i = startIdx; i < lines.length; i++) {
-    const cols = parseCSVLine(lines[i]);
-
-    // Detect projected cut row: col A (cols[0]) has content, col B (cols[1]) is empty/whitespace
-    // A merged row exports with value in cols[0] and all others empty
-    const colA = (cols[0]||'').trim();
-    const colB = (cols[1]||'').trim();
-    if (colA && !colB) {
-      // This is the projected cut merged row
-      projCutText = colA;
-      // Try to extract the numeric score: look for +N, -N, or E
-      const m = colA.match(/([+\-]\d+|\bE\b)/i);
-      if (m) {
-        const s = m[1].toUpperCase();
-        projCutScore = s === 'E' ? 0 : parseInt(s);
-      }
-      continue; // don't add as a player row
+    // Projected cut: col A has content, col B is empty
+    if(colA&&!colB){
+      projCutText=colA;
+      const m=colA.match(/([+\-]\d+|\bE\b)/i);
+      if(m){const s=m[1].toUpperCase(); projCutScore=s==='E'?0:parseInt(s);}
+      continue;
     }
 
-    // Player rows: data starts at col B (index 1)
-    // cols[1]=Pos, cols[2]=N/A flag col, cols[3]=Name
-    const posRaw = colB; // col B = Pos
-    const name = (cols[3]||'').trim(); // col D = Name
-    if (!name) continue;
+    const posRaw=colB;
+    const name=(cols[3]||'').trim();
+    if(!name) continue;
 
-    let pos = null, tied = false, cut = false;
-    const posUp = posRaw.toUpperCase();
-    if (['CUT','MC','WD','DQ'].includes(posUp)) { cut = true; }
-    else if (posUp.startsWith('T')) { pos = parseInt(posUp.slice(1))||null; tied = true; }
-    else if (/^\d+$/.test(posUp)) { pos = parseInt(posUp); }
+    let pos=null,tied=false,cut=false;
+    const posUp=posRaw.toUpperCase();
+    if(['CUT','MC','WD','DQ'].includes(posUp)){cut=true;}
+    else if(posUp.startsWith('T')){pos=parseInt(posUp.slice(1))||null;tied=true;}
+    else if(/^\d+$/.test(posUp)){pos=parseInt(posUp);}
 
-    const ps = v => {
-      if (!v||v.trim()===''||v.trim()==='--'||v.trim()==='-') return null;
-      const s = v.trim().toUpperCase();
-      if (s==='E'||s==='EVEN') return 0;
-      const n = parseInt(s); return isNaN(n)?null:n;
+    const ps=v=>{
+      if(!v||v.trim()===''||v.trim()==='--'||v.trim()==='-') return null;
+      const s=v.trim().toUpperCase();
+      if(s==='E'||s==='EVEN') return 0;
+      const n=parseInt(s); return isNaN(n)?null:n;
     };
 
-    // cols[4]=Total, cols[5]=Today, cols[6]=Thru, cols[7]=R1, cols[8]=R2, cols[9]=R3, cols[10]=R4
-    const total = ps(cols[4]), today = ps(cols[5]);
-    const thru = (cols[6]||'').trim()||'-';
-    const r1 = ps(cols[7]), r2 = ps(cols[8]), r3 = ps(cols[9]), r4 = ps(cols[10]);
+    const total=ps(cols[4]),today=ps(cols[5]);
+    const thru=(cols[6]||'').trim()||'-';
+    const r1=ps(cols[7]),r2=ps(cols[8]),r3=ps(cols[9]),r4=ps(cols[10]);
 
-    rows.push({name, pos:cut?null:pos, tied, tiedCount:1,
-      total:cut?null:total, today, thru, r1, r2, r3, r4,
-      madecut: !cut && (r2!==null || (r1!==null && thru==='F')),
-      cut, country:''});
+    rows.push({name,pos:cut?null:pos,tied,tiedCount:1,
+      total:cut?null:total,today,thru,r1,r2,r3,r4,
+      madecut:!cut&&(r2!==null||(r1!==null&&thru==='F')),
+      cut,country:''});
   }
 
-  // Compute tiedCounts
-  const pg = {};
-  rows.forEach(p => { if(p.pos) pg[p.pos]=(pg[p.pos]||0)+1; });
-  rows.forEach(p => { if(p.pos){ p.tiedCount=pg[p.pos]; if(p.tiedCount>1) p.tied=true; } });
+  const pg={};
+  rows.forEach(p=>{if(p.pos) pg[p.pos]=(pg[p.pos]||0)+1;});
+  rows.forEach(p=>{if(p.pos){p.tiedCount=pg[p.pos];if(p.tiedCount>1) p.tied=true;}});
   return rows;
 }
 
-function parseCSVLine(line) {
-  const cols=[]; let cur='', inQ=false;
+function parseCSVLine(line){
+  const cols=[];let cur='',inQ=false;
   for(let i=0;i<line.length;i++){
     const c=line[i];
     if(c==='"'){inQ=!inQ;}
     else if(c===','&&!inQ){cols.push(cur);cur='';}
     else{cur+=c;}
   }
-  cols.push(cur); return cols;
+  cols.push(cur);return cols;
 }
 
 // ── FORMAT ────────────────────────────────────────────────────────────────────
@@ -471,37 +465,37 @@ function fmt(s){if(s===null||s===undefined)return '-';if(s===0)return 'E';return
 function sc(s){if(s===null||s===undefined)return '';if(s<0)return 'u';if(s>0)return 'o';return 'ev';}
 
 // ── STATUS ────────────────────────────────────────────────────────────────────
-function updateStatus() {
-  const dot=document.getElementById('sdot'), txt=document.getElementById('sbarTxt');
+function updateStatus(){
+  const dot=document.getElementById('sdot'),txt=document.getElementById('sbarTxt');
   const time=lastLoaded?lastLoaded.toLocaleTimeString('en-GB'):'';
-  if(isConnected&&liveData.length){dot.className='sdot';txt.textContent='Live from Google Sheet · Updated '+time;}
+  if(isConnected&&liveData.length){dot.className='sdot';txt.textContent='Live from Google Sheet · Fetched '+time;}
   else if(isConnected){dot.className='sdot amber';txt.textContent='Sheet connected — no data rows found yet';}
   else{dot.className='sdot grey';txt.textContent='Not connected — see How to Update tab';}
   const active=liveData.filter(p=>p.pos).length;
   document.getElementById('sbarRound').textContent=liveData.length?`${active} players scored · ${liveData.length} in sheet`:'';
-  document.getElementById('hdrNote').textContent=liveData.length?'Last updated: '+time:'No data yet';
+  document.getElementById('hdrNote').textContent=liveData.length?'Last fetched: '+time:'No data yet';
   document.getElementById('statusDetail').textContent=isConnected
-    ?`✓ Connected. ${liveData.length} player rows loaded. Last refreshed: ${time||'never'}.`
+    ?`✓ Connected. ${liveData.length} player rows loaded. Last fetched: ${time||'never'}.`
     :'Not connected. Click Reconnect below.';
 }
 
 // ── LOAD SHEET ────────────────────────────────────────────────────────────────
-async function loadSheet() {
+async function loadSheet(){
   const btn=document.getElementById('refreshBtn');
   if(btn){btn.disabled=true;btn.textContent='Loading…';}
-  try {
+  try{
     const resp=await fetch(PUBLISHED_CSV_URL);
     if(!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const text=await resp.text();
     if(!text.trim()) throw new Error('Sheet appears empty');
     const parsed=parseCSV(text);
     if(!parsed.length) throw new Error('No player rows found — check data starts from row 2');
-    liveData=parsed; playerMap=buildMap(liveData); lastLoaded=new Date(); isConnected=true;
-    updateStatus(); renderAll();
+    liveData=parsed;playerMap=buildMap(liveData);lastLoaded=new Date();isConnected=true;
+    updateStatus();renderAll();
     const msg=document.getElementById('connectMsg');
     if(msg){msg.textContent=`✓ Loaded ${parsed.length} rows`;msg.className='pmsg ok';}
-  } catch(err) {
-    console.error(err); isConnected=false; updateStatus();
+  }catch(err){
+    console.error(err);isConnected=false;updateStatus();
     const msg=document.getElementById('connectMsg');
     if(msg){msg.textContent=`✗ ${err.message}`;msg.className='pmsg err';}
     document.getElementById('offContent').innerHTML=`<div style="background:#fff0f0;border:1px solid #f5c6c6;border-radius:6px;padding:14px 18px;color:#c0392b;font-size:13px;">
@@ -510,10 +504,10 @@ async function loadSheet() {
   if(btn){btn.disabled=false;btn.textContent='↻ Refresh';}
 }
 
-function unlockAndReconnect() {
+function unlockAndReconnect(){
   const input=document.getElementById('sheetUrl');
   if(input.readOnly){
-    input.readOnly=false; input.focus();
+    input.readOnly=false;input.focus();
     document.getElementById('connectMsg').textContent='URL unlocked — paste new URL then click Reconnect again.';
     document.getElementById('connectMsg').className='pmsg ok';
     return;
@@ -521,81 +515,69 @@ function unlockAndReconnect() {
   const val=input.value.trim();
   const msg=document.getElementById('connectMsg');
   if(val.includes('/pub?')&&val.includes('output=csv')){
-    PUBLISHED_CSV_URL=val; input.readOnly=true;
-    msg.textContent=''; msg.className='pmsg';
-    loadSheet();
-  } else {
+    PUBLISHED_CSV_URL=val;input.readOnly=true;
+    msg.textContent='';msg.className='pmsg';loadSheet();
+  }else{
     msg.textContent='✗ Please paste the published CSV URL (File → Share → Publish to web → CSV).';
     msg.className='pmsg err';
   }
 }
 
 // ── RENDER ALL ────────────────────────────────────────────────────────────────
-function renderAll(){ renderLegend(); renderOff(); renderDraft(); renderTeams(); }
+function renderAll(){renderLegend();renderOff();renderDraft();renderTeams();}
 
-function renderLegend() {
+function renderLegend(){
   const el=document.getElementById('legend');
   el.innerHTML='<span style="font-weight:500;margin-right:4px">Teams:</span>';
   TEAMS.forEach((t,i)=>el.innerHTML+=`<span><span class="lsw" style="background:${TC[i]}"></span>${t.name}</span>`);
 }
 
 // ── OFFICIAL LEADERBOARD ──────────────────────────────────────────────────────
-function renderOff() {
+function renderOff(){
   const el=document.getElementById('offContent');
   if(!liveData.length){
     el.innerHTML=`<div class="no-data-prompt"><div class="arrow">⛳</div><p>No data yet — see the <strong>How to Update</strong> tab for instructions.</p></div>`;
     return;
   }
 
-  // Sort within each position group: drafted first, then undrafted (preserving original order within each sub-group)
-  // Overall order: by pos asc, then unscored (no pos, not cut), then cut
-  // Within each pos group: drafted before undrafted, then preserve sheet order (thru)
-  const withIdx = liveData.map((p,i) => ({...p, origIdx:i}));
+  const withIdx=liveData.map((p,i)=>({...p,origIdx:i}));
+  const scored=withIdx.filter(p=>!p.cut&&p.pos);
+  const unscored=withIdx.filter(p=>!p.cut&&!p.pos);
+  const cut=withIdx.filter(p=>p.cut);
 
-  // Separate into groups
-  const scored   = withIdx.filter(p => !p.cut && p.pos);
-  const unscored = withIdx.filter(p => !p.cut && !p.pos);
-  const cut      = withIdx.filter(p => p.cut);
+  // Sort each group: drafted first, then by origIdx
+  const sortGroup=(arr,byPos=false)=>{
+    if(byPos){
+      arr.sort((a,b)=>{
+        if(a.pos!==b.pos) return a.pos-b.pos;
+        const ad=isDrafted(a.name)?0:1,bd=isDrafted(b.name)?0:1;
+        if(ad!==bd) return ad-bd;
+        return a.origIdx-b.origIdx;
+      });
+    } else {
+      arr.sort((a,b)=>{
+        const ad=isDrafted(a.name)?0:1,bd=isDrafted(b.name)?0:1;
+        if(ad!==bd) return ad-bd;
+        return a.origIdx-b.origIdx;
+      });
+    }
+    return arr;
+  };
 
-  // Sort scored: by pos, then within pos drafted first, then by origIdx
-  scored.sort((a,b) => {
-    if(a.pos !== b.pos) return a.pos - b.pos;
-    const ad = isDrafted(a.name) ? 0 : 1;
-    const bd = isDrafted(b.name) ? 0 : 1;
-    if(ad !== bd) return ad - bd;
-    return a.origIdx - b.origIdx;
-  });
-
-  // Sort unscored: drafted first, then origIdx
-  unscored.sort((a,b) => {
-    const ad = isDrafted(a.name) ? 0 : 1;
-    const bd = isDrafted(b.name) ? 0 : 1;
-    if(ad !== bd) return ad - bd;
-    return a.origIdx - b.origIdx;
-  });
-
-  // Sort cut: drafted first, then origIdx
-  cut.sort((a,b) => {
-    const ad = isDrafted(a.name) ? 0 : 1;
-    const bd = isDrafted(b.name) ? 0 : 1;
-    if(ad !== bd) return ad - bd;
-    return a.origIdx - b.origIdx;
-  });
-
-  const sorted = [...scored, ...unscored, ...cut];
+  const sorted=[...sortGroup(scored,true),...sortGroup(unscored),...sortGroup(cut)];
 
   // Last scoring index
-  let lastScoringIdx = -1;
+  let lastScoringIdx=-1;
   for(let i=0;i<sorted.length;i++){
-    if(!sorted[i].cut && sorted[i].pos && sorted[i].pos<=MAX_PTS_POS) lastScoringIdx=i;
+    if(!sorted[i].cut&&sorted[i].pos&&sorted[i].pos<=MAX_PTS_POS) lastScoringIdx=i;
   }
 
-  // Position group end indices (last row of each pos group)
-  const posGroupEnd = new Set();
+  // Position group end indices
+  const posGroupEnd=new Set();
   for(let i=0;i<sorted.length;i++){
-    const p=sorted[i], next=sorted[i+1];
+    const p=sorted[i],next=sorted[i+1];
     if(p.cut) continue;
-    if(!next || next.cut || next.pos!==p.pos) posGroupEnd.add(i);
+    if(!next||next.cut||next.pos!==p.pos) posGroupEnd.add(i);
   }
 
   let html=`<table class="lb"><thead><tr>
@@ -605,59 +587,51 @@ function renderOff() {
     <th class="r">Draft Pts</th>
   </tr></thead><tbody>`;
 
-  let cutShown = false;
-  let projCutInserted = false;
+  let cutShown=false,projCutInserted=false;
 
-  sorted.forEach((p,i) => {
-    // Insert projected cut row at the right place (between scores)
-    if (projCutScore !== null && !projCutInserted && !p.cut) {
-      const pTotal = p.total !== null ? p.total : 999;
-      if (pTotal >= projCutScore) {
-        projCutInserted = true;
-        html += `<tr class="proj-cut-row"><td colspan="10">✂ ${projCutText}</td></tr>`;
+  sorted.forEach((p,i)=>{
+    // Insert projected cut row AFTER the last player whose total <= projCutScore
+    // i.e. before the first player whose total > projCutScore
+    if(projCutScore!==null&&!projCutInserted&&!p.cut&&p.total!==null){
+      if(p.total>projCutScore){
+        projCutInserted=true;
+        html+=`<tr class="proj-cut-row"><td colspan="10">✂ ${projCutText}</td></tr>`;
       }
     }
 
-    if(p.cut && !cutShown){
+    if(p.cut&&!cutShown){
       cutShown=true;
-      // Insert proj cut if not yet shown (all players above cut line)
-      if(projCutScore!==null && !projCutInserted){
+      if(projCutScore!==null&&!projCutInserted){
         projCutInserted=true;
         html+=`<tr class="proj-cut-row"><td colspan="10">✂ ${projCutText}</td></tr>`;
       }
       html+=`<tr class="cut-div"><td colspan="10">— Missed Cut —</td></tr>`;
     }
 
-    const teams = getDraftTeams(p.name);
-    const drafted = teams.length > 0;
-    const badges = teams.map(d=>`<span class="badge" style="background:${TC[d.ti]}">${d.teamName}</span>`).join('');
-    const posStr = !p.pos?(p.cut?'MC':(p.thru==='-'?'–':'?')):(p.tied?'T'+p.pos:''+p.pos);
-    const pm = playerMap[normStr(p.name)]||{};
+    const teams=getDraftTeams(p.name);
+    const drafted=teams.length>0;
+    const badges=teams.map(d=>`<span class="badge" style="background:${TC[d.ti]}">${d.teamName}</span>`).join('');
+    const posStr=!p.pos?(p.cut?'MC':(p.thru==='-'?'–':'?')):(p.tied?'T'+p.pos:''+p.pos);
+    const pm=playerMap[normStr(p.name)]||{};
 
-    // Points display
     let ptsHtml='–';
-    if(!p.cut && p.pos){
-      const rawPts = pm.draftPts!==undefined ? pm.draftPts : 0;
+    if(!p.cut&&p.pos){
+      const rawPts=pm.draftPts!==undefined?pm.draftPts:0;
       if(rawPts>0){
-        ptsHtml = drafted
-          ? `<span style="font-weight:600;color:var(--green)">${rawPts.toFixed(1)}</span>`
-          : `<span class="pts-undrafted">${rawPts.toFixed(1)}</span>`;
+        ptsHtml=drafted
+          ?`<span style="font-weight:600;color:var(--green)">${rawPts.toFixed(1)}</span>`
+          :`<span class="pts-undrafted">${rawPts.toFixed(1)}</span>`;
       }
     }
 
-    // Border: thick green between scoring groups, thick grey between non-scoring groups, red after last scoring
     let borderClass='';
-    if(!p.cut && posGroupEnd.has(i)){
-      if(i===lastScoringIdx){
-        borderClass='grp-border-red';
-      } else if(p.pos && p.pos<=MAX_PTS_POS){
-        borderClass='grp-border-scoring';
-      } else {
-        borderClass='grp-border-nonscoring';
-      }
+    if(!p.cut&&posGroupEnd.has(i)){
+      if(i===lastScoringIdx) borderClass='grp-border-red';
+      else if(p.pos&&p.pos<=MAX_PTS_POS) borderClass='grp-border-scoring';
+      else borderClass='grp-border-nonscoring';
     }
 
-    const trClass=[p.cut?'cut-row':'', borderClass].filter(Boolean).join(' ');
+    const trClass=[p.cut?'cut-row':'',borderClass].filter(Boolean).join(' ');
 
     html+=`<tr class="${trClass}">
       <td style="font-weight:600;color:var(--green)">${posStr}</td>
@@ -671,8 +645,7 @@ function renderOff() {
     </tr>`;
   });
 
-  // If proj cut not yet inserted (all players under cut score), add at end
-  if(projCutScore!==null && !projCutInserted){
+  if(projCutScore!==null&&!projCutInserted){
     html+=`<tr class="proj-cut-row"><td colspan="10">✂ ${projCutText}</td></tr>`;
   }
 
@@ -681,17 +654,29 @@ function renderOff() {
 }
 
 // ── DRAFT LEADERBOARD ─────────────────────────────────────────────────────────
-function renderDraft() {
+function renderDraft(){
   const el=document.getElementById('draftContent');
-  if(!liveData.length){el.innerHTML='<div class="loading">No data yet.</div>';return;}
+  const noteEl=document.getElementById('asteriskNote');
+  if(!liveData.length){el.innerHTML='<div class="loading">No data yet.</div>';noteEl.style.display='none';return;}
+
+  let anyNotStarted=false;
 
   const scores=TEAMS.map((team,ti)=>{
     let total=0;
     const details=team.players.map(tp=>{
       const live=matchP(tp.name,liveData);
       const pm=live?(playerMap[normStr(live.name)]||{}):{};
-      const pts=pm.draftPts||0; total+=pts;
-      return{tp,live,pts};
+      const pts=pm.draftPts||0;total+=pts;
+      return{tp,live,pm,pts};
+    });
+    // Sort by leaderboard position: scored first (by pos), then not started, then cut
+    details.sort((a,b)=>{
+      const al=a.live,bl=b.live;
+      const acut=al&&al.cut,bcut=bl&&bl.cut;
+      if(acut&&!bcut) return 1; if(!acut&&bcut) return -1;
+      const apos=al&&al.pos?al.pos:9999;
+      const bpos=bl&&bl.pos?bl.pos:9999;
+      return apos-bpos;
     });
     return{team,ti,total:Math.round(total*10)/10,details};
   }).sort((a,b)=>b.total-a.total);
@@ -699,43 +684,74 @@ function renderDraft() {
   let html='<div class="dlb">';
   scores.forEach((ts,rank)=>{
     const rc=rank===0?'r1c':rank===1?'r2c':rank===2?'r3c':'rnc';
-    const mini=ts.details.map(d=>{
+    let playerRows='';
+    ts.details.forEach(d=>{
       const l=d.live;
-      if(!l||l.thru==='-') return d.tp.name.split(' ').pop()+' (–)';
-      const pos=l.cut?'MC':l.pos?(l.tied?'T'+l.pos:''+l.pos):'–';
-      return `${d.tp.name.split(' ').pop()} (${pos})`;
-    }).join(' · ');
+      const ns=!l||isTime(l.thru);
+      const cut=l&&l.cut;
+      if(ns&&!cut) anyNotStarted=true;
+
+      const posStr=!l?'?':cut?'MC':!l.pos?'–':(l.tied?'T'+l.pos:''+l.pos);
+
+      // Cut status colouring
+      const cs=l?cutStatus(l):'unknown';
+      const nameClass=cut?'cut':(cs==='safe'?'safe':'ns');
+
+      const asterisk=(ns&&!cut)?'*':'';
+      const scoreStr=(!l||l.total===null)?'':fmt(l.total);
+      const ptsStr=d.pts>0?d.pts.toFixed(1):'–';
+
+      playerRows+=`<div class="dplayer-row">
+        <span class="dplayer-pos">${posStr}</span>
+        <span class="dplayer-name ${nameClass}">${d.tp.name}${asterisk}</span>
+        <span class="dplayer-score ${sc(l?l.total:null)}">${scoreStr}</span>
+        <span class="dplayer-pts" style="color:${d.pts>0?TC[ts.ti]:'var(--muted)'}">${ptsStr}</span>
+      </div>`;
+    });
+
     html+=`<div class="drow" onclick="jumpTeam('${ts.team.name}')">
-      <div class="drank ${rc}">${rank+1}</div>
-      <div style="flex:1"><div class="dname">${ts.team.name}</div><div class="dmini">${mini}</div></div>
-      <div><div class="dpts" style="color:${TC[ts.ti]}">${ts.total.toFixed(1)}</div><div class="dpts-lbl">pts</div></div>
+      <div class="drow-header">
+        <div class="drank ${rc}">${rank+1}</div>
+        <div style="flex:1"><div class="dname">${ts.team.name}</div></div>
+        <div><div class="dpts" style="color:${TC[ts.ti]}">${ts.total.toFixed(1)}</div><div class="dpts-lbl">pts</div></div>
+      </div>
+      <div class="dplayers">${playerRows}</div>
     </div>`;
   });
   html+='</div>';
   el.innerHTML=html;
+  noteEl.style.display=anyNotStarted?'block':'none';
 }
 
 // ── TEAMS ─────────────────────────────────────────────────────────────────────
-function renderTeams() {
+function renderTeams(){
   const el=document.getElementById('teamsContent');
   if(!liveData.length){el.innerHTML='<div class="loading">No data yet.</div>';return;}
 
   let html='<div class="tgrid">';
   TEAMS.forEach((team,ti)=>{
-    let total=0, rows='';
+    let total=0,rows='';
     team.players.forEach(tp=>{
       const live=matchP(tp.name,liveData);
       const pm=live?(playerMap[normStr(live.name)]||{}):{};
-      const pts=pm.draftPts||0; total+=pts;
-      const ns=!live||live.thru==='-', cut=live&&live.cut;
+      const pts=pm.draftPts||0;total+=pts;
+      const ns=!live||live.thru==='-'||isTime(live.thru);
+      const cut=live&&live.cut;
       const pos=!live?'?':cut?'MC':!live.pos?'–':(live.tied?'T'+live.pos:''+live.pos);
       const topar=live?live.total:null;
+      const thruStr=live?live.thru:'-';
       const pcol=cut?'#c0392b':ns?'var(--muted)':'var(--dark)';
       const mcClass=cut?'mc-row':'';
+
+      // Name colour based on cut status
+      const cs=live?cutStatus(live):'unknown';
+      const nameClass=cut?'missed':(cs==='safe'?'safe':'');
+
       rows+=`<div class="tprow ${mcClass}">
         <span class="pick">${tp.pick}</span>
-        <span class="tpname">${tp.name}</span>
+        <span class="tpname ${nameClass}">${tp.name}</span>
         <span class="tppos" style="color:${pcol}">${pos}</span>
+        <span class="tpthru">${thruStr}</span>
         <span class="tpscore ${sc(topar)}">${ns?'':fmt(topar)}</span>
         <span class="tppts" style="color:${pts>0?TC[ti]:'var(--muted)'}">${pts>0?pts.toFixed(1):'–'}</span>
       </div>`;
@@ -758,10 +774,8 @@ function jumpTeam(name){
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
-updateStatus();
-renderLegend();
-loadSheet();
-setInterval(loadSheet, 3*60*1000);
+updateStatus();renderLegend();loadSheet();
+setInterval(loadSheet,3*60*1000);
 </script>
 </body>
 </html>
