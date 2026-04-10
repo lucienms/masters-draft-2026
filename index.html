@@ -207,7 +207,7 @@
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
-          <strong>Paste into cell A2.</strong> Click on cell A2 and paste (Ctrl+V / Cmd+V). The data will paste almost perfectly — except that rows 3 onwards will be shifted one column to the right. To fix this: select all cells from B3 downwards (to the last row of data), cut them (Ctrl+X / Cmd+X), then click cell A3 and paste (Ctrl+V / Cmd+V). This moves everything back into the correct columns.
+          <strong>Paste into cell A2.</strong> Click on cell A2 and paste (Ctrl+V / Cmd+V). Before doing anything else, scroll through the pasted data and find the <strong>projected cut row</strong> (it will appear as a divider row mid-table, not a player row) — select that entire row and delete it. Once deleted, rows 3 onwards will be shifted one column to the right. To fix this: select all cells from B3 downwards (to the last row of data), cut them (Ctrl+X / Cmd+X), then click cell A3 and paste (Ctrl+V / Cmd+V). This moves everything back into the correct columns.
         </div>
       </div>
 
@@ -392,7 +392,26 @@ function parseCSV(text) {
     const cols = parseCSVLine(lines[i]);
     if (cols.length < 2) continue;
     const posRaw = (cols[0]||'').trim();
-    const name = (cols[1]||'').trim();
+
+    // ESPN added a second column (N/A / flag col) — detect by checking if col[1]
+    // looks like a name (contains a letter and a space, or is clearly not numeric/flag).
+    // If col[2] looks more like a name than col[1], shift all data right by 1.
+    const col1 = (cols[1]||'').trim();
+    const col2 = (cols[2]||'').trim();
+    const col1IsName = /[a-zA-Z]/.test(col1) && col1.split(' ').length >= 2;
+    const col2IsName = /[a-zA-Z]/.test(col2) && col2.split(' ').length >= 2;
+    // If col2 looks more like a full name than col1, assume col1 is the N/A column
+    const hasExtraCol = !col1IsName && col2IsName;
+    const nameIdx   = hasExtraCol ? 2 : 1;
+    const totalIdx  = hasExtraCol ? 3 : 2;
+    const todayIdx  = hasExtraCol ? 4 : 3;
+    const thruIdx   = hasExtraCol ? 5 : 4;
+    const r1Idx     = hasExtraCol ? 6 : 5;
+    const r2Idx     = hasExtraCol ? 7 : 6;
+    const r3Idx     = hasExtraCol ? 8 : 7;
+    const r4Idx     = hasExtraCol ? 9 : 8;
+
+    const name = (cols[nameIdx]||'').trim();
     if (!name) continue;
 
     let pos = null, tied = false, cut = false;
@@ -408,9 +427,9 @@ function parseCSV(text) {
       const n = parseInt(s); return isNaN(n)?null:n;
     };
 
-    const total=ps(cols[2]), today=ps(cols[3]);
-    const thru=(cols[4]||'').trim()||'-';
-    const r1=ps(cols[5]), r2=ps(cols[6]), r3=ps(cols[7]), r4=ps(cols[8]);
+    const total=ps(cols[totalIdx]), today=ps(cols[todayIdx]);
+    const thru=(cols[thruIdx]||'').trim()||'-';
+    const r1=ps(cols[r1Idx]), r2=ps(cols[r2Idx]), r3=ps(cols[r3Idx]), r4=ps(cols[r4Idx]);
 
     rows.push({name, pos:cut?null:pos, tied, tiedCount:1,
       total:cut?null:total, today, thru, r1, r2, r3, r4,
