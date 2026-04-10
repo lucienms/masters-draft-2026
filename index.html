@@ -10,6 +10,7 @@
     --green:#1a4731; --green-mid:#2d6a4f; --green-light:#40916c;
     --cream:#f5f0e8; --cream-dark:#e8dfc8; --gold:#c9a84c; --gold-light:#e8c96a;
     --white:#fdfaf4; --dark:#0d2818; --muted:#6b7c6e; --border:rgba(26,71,49,0.15);
+    --red:#c0392b;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--dark);min-height:100vh;}
@@ -36,8 +37,11 @@
   .main{max-width:1100px;margin:0 auto;padding:18px 14px 40px;}
   .panel{display:none;}.panel.active{display:block;}
 
-  .stitle{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--green);border-bottom:1px solid var(--gold);padding-bottom:7px;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .stitle{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--green);border-bottom:1px solid var(--gold);padding-bottom:7px;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
   .stitle .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+  /* projected cut line */
+  .cut-line-note{font-size:11px;color:var(--red);font-weight:600;margin-bottom:10px;letter-spacing:0.03em;}
 
   .btn-gold{background:var(--gold);color:var(--dark);border:none;padding:7px 16px;border-radius:4px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:background 0.18s;}
   .btn-gold:hover{background:var(--gold-light);}
@@ -56,9 +60,19 @@
   .lb td{padding:8px 10px;} .lb td.r{text-align:right;} .lb td.c{text-align:center;}
   .u{color:#c0392b;font-weight:600;} .o{color:#555;font-weight:500;} .ev{color:var(--green-mid);font-weight:600;}
   .badge{display:inline-block;padding:2px 6px;border-radius:3px;font-size:10px;font-weight:600;margin-left:4px;vertical-align:middle;color:#fff;}
+
+  /* position group dividers */
+  .lb tbody tr.grp-border td{border-bottom:3px solid var(--border);}
+  .lb tbody tr.grp-border-red td{border-bottom:3px solid var(--red);}
+
+  /* cut rows */
   .cut-div td{background:rgba(192,57,43,0.08);padding:4px 10px;font-size:10px;font-weight:700;color:#c0392b;letter-spacing:0.1em;text-transform:uppercase;}
-  .cut-row td{opacity:0.55;}
-  .legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:center;font-size:11px;color:var(--muted);}
+  .cut-row{opacity:0.5;}
+
+  /* undrafted pts — greyed italic */
+  .pts-undrafted{color:var(--muted);font-style:italic;font-weight:400;}
+
+  .legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;align-items:center;font-size:11px;color:var(--muted);}
   .lsw{width:11px;height:11px;border-radius:2px;display:inline-block;margin-right:3px;vertical-align:middle;}
 
   /* DRAFT LEADERBOARD */
@@ -81,41 +95,35 @@
   .tcard-pts span{font-size:11px;color:rgba(255,255,255,0.5);margin-left:2px;}
   .tprow{display:flex;align-items:center;padding:7px 13px;border-bottom:1px solid var(--border);gap:7px;font-size:13px;}
   .tprow:last-child{border-bottom:none;}
+  .tprow.mc-row{opacity:0.5;}
   .pick{font-size:10px;width:28px;flex-shrink:0;text-align:center;background:var(--cream-dark);border-radius:3px;padding:2px 0;font-weight:600;color:var(--muted);}
   .tpname{flex:1;font-weight:500;}
   .tppos{font-size:12px;min-width:52px;}
   .tpscore{font-size:12px;font-weight:600;min-width:34px;text-align:right;}
   .tppts{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;min-width:34px;text-align:right;}
 
-  /* SETUP PANEL */
+  /* SETUP / HOW TO UPDATE */
   .setup-box{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px;}
-  .setup-box h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--green);margin-bottom:10px;}
-  .setup-box p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px;}
-  .setup-box code{background:var(--cream-dark);padding:2px 6px;border-radius:3px;font-size:12px;font-family:monospace;}
-  .step{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start;}
+  .setup-box h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--green);margin-bottom:12px;}
+  .step{display:flex;gap:12px;margin-bottom:16px;align-items:flex-start;}
+  .step:last-child{margin-bottom:0;}
   .step-num{width:26px;height:26px;border-radius:50%;background:var(--green);color:var(--cream);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-  .step-body{flex:1;font-size:13px;color:var(--muted);line-height:1.6;}
+  .step-body{flex:1;font-size:13px;color:var(--muted);line-height:1.65;}
   .step-body strong{color:var(--dark);}
+  .step-body a{color:var(--green-mid);font-weight:600;}
+  .step-body .sheet-link{color:var(--green-mid);font-weight:600;word-break:break-all;}
+  .step-img{margin-top:10px;border:1px solid var(--border);border-radius:6px;overflow:hidden;max-width:100%;}
+  .step-img img{width:100%;display:block;}
+  .pmsg{font-size:12px;margin-left:4px;}
+  .ok{color:var(--green-mid);} .err{color:#c0392b;}
   .sheet-url-row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap;}
   .sheet-url-row input{flex:1;min-width:200px;border:1px solid var(--border);border-radius:4px;padding:8px 10px;font-size:12px;font-family:monospace;background:var(--cream);color:var(--dark);}
   .sheet-url-row input:focus{outline:1px solid var(--green-light);}
-  .pmsg{font-size:12px;margin-left:4px;}
-  .ok{color:var(--green-mid);} .err{color:#c0392b;}
 
   .info-box{background:#fffce6;border:1px solid #e8c84c;border-radius:6px;padding:12px 16px;font-size:12px;color:#6b5000;line-height:1.6;margin-bottom:14px;}
-  .info-box a{color:#6b5000;font-weight:600;}
   .info-box strong{color:#4a3700;}
 
-  .cols-preview{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0;}
-  .cols-preview th{background:var(--green);color:var(--cream);padding:6px 10px;text-align:left;font-weight:500;}
-  .cols-preview td{padding:5px 10px;border-bottom:1px solid var(--border);color:var(--muted);}
-  .cols-preview tr:last-child td{border-bottom:none;}
-  .cols-preview td.eg{color:var(--dark);font-family:monospace;font-size:11px;}
-
   .loading{text-align:center;padding:32px;color:var(--muted);font-style:italic;}
-  .spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--cream-dark);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;vertical-align:middle;margin-right:6px;}
-  @keyframes spin{to{transform:rotate(360deg)}}
-
   .no-data-prompt{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:28px;text-align:center;}
   .no-data-prompt p{color:var(--muted);font-size:14px;margin-bottom:14px;}
   .no-data-prompt .arrow{font-size:22px;margin-bottom:8px;color:var(--gold);}
@@ -142,7 +150,7 @@
   <button class="tab active" onclick="showPanel('official',this)">Official Leaderboard</button>
   <button class="tab" onclick="showPanel('draft',this)">Draft Leaderboard</button>
   <button class="tab" onclick="showPanel('teams',this)">Teams</button>
-  <button class="tab" onclick="showPanel('setup',this)">⚙ Setup</button>
+  <button class="tab" onclick="showPanel('setup',this)">How to Update</button>
 </div>
 
 <div class="main">
@@ -153,8 +161,9 @@
       <div class="dot"></div>Official Leaderboard
       <button class="btn-gold" id="refreshBtn" style="float:right;margin-top:-2px" onclick="loadSheet()">↻ Refresh</button>
     </div>
+    <div id="projCutLine"></div>
     <div class="legend" id="legend"></div>
-    <div id="offContent"><div class="no-data-prompt"><div class="arrow">⛳</div><p>No data loaded yet. Go to the <strong>Setup</strong> tab to connect your Google Sheet.</p><button class="btn-gold" onclick="showPanel('setup', document.querySelectorAll('.tab')[3])">Go to Setup</button></div></div>
+    <div id="offContent"><div class="no-data-prompt"><div class="arrow">⛳</div><p>No data loaded yet. See the <strong>How to Update</strong> tab for instructions.</p></div></div>
   </div>
 
   <!-- DRAFT LB -->
@@ -169,59 +178,66 @@
     <div id="teamsContent"><div class="loading">No data yet.</div></div>
   </div>
 
-  <!-- SETUP -->
+  <!-- HOW TO UPDATE -->
   <div class="panel" id="panel-setup">
-    <div class="stitle"><div class="dot"></div>Setup — Google Sheet Connection</div>
+    <div class="stitle"><div class="dot"></div>How to Update Scores</div>
 
     <div class="setup-box">
-      <h3>How it works</h3>
+      <h3>Steps to update the leaderboard</h3>
+
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
-          <strong>Set up your Google Sheet</strong> with the columns below in row 1, matching exactly what ESPN's leaderboard shows. Paste ESPN data from row 2 onwards — you can select all &amp; paste directly.
+          <strong>Go to the ESPN Masters leaderboard</strong> at <a href="https://www.espn.com/golf/leaderboard" target="_blank">espn.com/golf/leaderboard</a> and copy the leaderboard table. Start your highlight from the first player row (not the column header row) and drag down to the last player — on the final row, stop your highlight slightly before the right edge of the last column, as shown in the screenshot below.
+          <div class="step-img" id="screenshotContainer">
+            <img id="screenshotImg" src="" alt="Screenshot showing how to highlight the ESPN leaderboard" style="display:none"/>
+            <div id="screenshotPlaceholder" style="padding:14px;font-size:12px;color:var(--muted);text-align:center;font-style:italic;">Screenshot loading…</div>
+          </div>
         </div>
       </div>
-      <table class="cols-preview">
-        <thead><tr><th>A: Pos</th><th>B: Name</th><th>C: Total</th><th>D: Today</th><th>E: Thru</th><th>F: R1</th><th>G: R2</th><th>H: R3</th><th>I: R4</th><th>J: Total Shots</th></tr></thead>
-        <tbody>
-          <tr><td class="eg">1</td><td class="eg">Rory McIlroy</td><td class="eg">-5</td><td class="eg">-5</td><td class="eg">F</td><td class="eg">-5</td><td class="eg"></td><td class="eg"></td><td class="eg"></td><td class="eg">67</td></tr>
-          <tr><td class="eg">T2</td><td class="eg">Sam Burns</td><td class="eg">-5</td><td class="eg">-5</td><td class="eg">F</td><td class="eg">-5</td><td class="eg"></td><td class="eg"></td><td class="eg"></td><td class="eg">67</td></tr>
-          <tr><td class="eg">T4</td><td class="eg">Jason Day</td><td class="eg">-3</td><td class="eg">-3</td><td class="eg">F</td><td class="eg">-3</td><td class="eg"></td><td class="eg"></td><td class="eg"></td><td class="eg">69</td></tr>
-        </tbody>
-      </table>
+
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
-          <strong>Publish your sheet to web.</strong> In Google Sheets go to <em>File → Share → Publish to web</em> → select <strong>Sheet1</strong> and <strong>CSV</strong> → click <strong>Publish</strong>. Copy the URL it gives you (it starts with <code>https://docs.google.com/spreadsheets/d/e/2PACX…</code>).
+          <strong>Open the Google Sheet</strong> using the link below (this is the same link shared on WhatsApp):<br>
+          <a class="sheet-link" href="https://docs.google.com/spreadsheets/d/1JrZKNO6vkoqXBSY9aoDtviZz6WVnprODF1mGKmqUHc0/edit" target="_blank">docs.google.com/spreadsheets/d/1JrZKNO6vkoqXBSY9aoDtviZz6WVnprODF1mGKmqUHc0/edit</a>
         </div>
       </div>
+
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
-          <strong>Your published URL is already connected below.</strong> If you ever need to reconnect with a new URL, paste it here and click Connect. The app auto-refreshes every 3 minutes.
+          <strong>Paste into cell A2.</strong> Click on cell A2 and paste (Ctrl+V / Cmd+V). The data will paste almost perfectly — except that rows 3 onwards will be shifted one column to the right. To fix this: select all cells from B3 downwards (to the last row of data), cut them (Ctrl+X / Cmd+X), then click cell A3 and paste (Ctrl+V / Cmd+V). This moves everything back into the correct columns.
         </div>
       </div>
-      <div class="sheet-url-row">
-        <input type="text" id="sheetUrl" placeholder="Paste published CSV URL here…" value="https://docs.google.com/spreadsheets/d/e/2PACX-1vSU1qW-7kdt13BZaZ5O87DLGyPg-YnXvEevlBWWlgczthe5_zsQGYtB9FgfIp6LQ3lk5GLmDyvdlkmf/pub?gid=0&single=true&output=csv" />
-        <button class="btn-gold" onclick="connectSheet()">Connect &amp; Load</button>
-        <span class="pmsg" id="connectMsg"></span>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>The app updates automatically.</strong> The Google Sheet saves instantly, and the app refreshes every 3 minutes. If you want to see the update sooner, click the <strong>↻ Refresh</strong> button on the Official Leaderboard tab — though it may still take up to 30 seconds for Google's servers to reflect the new data.
+        </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>Updating scores:</strong> Whenever you want to refresh, open your Google Sheet, go to <a href="https://www.espn.com/golf/leaderboard" target="_blank">ESPN's Masters leaderboard</a>, select all the leaderboard rows, copy and paste them into the sheet from row 2 — overwriting any previous data. Then click <strong>↻ Refresh</strong> in the app (or wait up to 3 minutes for the auto-refresh). The app matches player names automatically.
+      <strong>Note:</strong> Each time you update, paste from A2 and overwrite all previous data. You don't need to delete the old rows first — just paste over them.
     </div>
 
     <div class="setup-box">
       <h3>Connection status</h3>
-      <p id="statusDetail" style="margin:0">Not connected yet.</p>
+      <p id="statusDetail" style="margin:0;font-size:13px;color:var(--muted)">Not connected yet.</p>
+      <div class="sheet-url-row" style="margin-top:12px">
+        <input type="text" id="sheetUrl" placeholder="Paste published CSV URL here if reconnecting…" value="https://docs.google.com/spreadsheets/d/e/2PACX-1vSU1qW-7kdt13BZaZ5O87DLGyPg-YnXvEevlBWWlgczthe5_zsQGYtB9FgfIp6LQ3lk5GLmDyvdlkmf/pub?gid=0&single=true&output=csv" />
+        <button class="btn-gold" onclick="connectSheet()">Reconnect</button>
+        <span class="pmsg" id="connectMsg"></span>
+      </div>
     </div>
   </div>
 
 </div>
 
 <script>
-// ── TEAMS ──────────────────────────────────────────────────────────────────────
+// ── TEAMS ─────────────────────────────────────────────────────────────────────
 const TEAMS = [
   {name:"Jack", players:[
     {name:"Scottie Scheffler",pick:"1.1"}, {name:"Brooks Koepka",pick:"2.9"},
@@ -230,7 +246,7 @@ const TEAMS = [
   ]},
   {name:"Harry", players:[
     {name:"Jon Rahm",pick:"1.2"},          {name:"Collin Morikawa",pick:"2.8"},
-    {name:"Jordan Spieth",pick:"3.2"},     {name:"Nicolai Hojgaard",pick:"4.8"},
+    {name:"Jordan Spieth",pick:"3.2"},     {name:"Nicolai Højgaard",pick:"4.8"},
     {name:"Cam Smith",pick:"5.2"},         {name:"Ryan Fox",pick:"6.8"}
   ]},
   {name:"Luc", players:[
@@ -251,7 +267,7 @@ const TEAMS = [
   {name:"Josh", players:[
     {name:"Matt Fitzpatrick",pick:"1.6"},  {name:"Hideki Matsuyama",pick:"2.4"},
     {name:"Max Homa",pick:"3.6"},          {name:"Sam Burns",pick:"4.4"},
-    {name:"Rasmus Hojgaard",pick:"5.6"},   {name:"Aaron Rai",pick:"6.4"}
+    {name:"Rasmus Højgaard",pick:"5.6"},   {name:"Aaron Rai",pick:"6.4"}
   ]},
   {name:"Conor", players:[
     {name:"Tommy Fleetwood",pick:"1.7"},   {name:"Justin Rose",pick:"2.3"},
@@ -270,390 +286,413 @@ const TEAMS = [
   ]}
 ];
 
+// Flat list of all draft player names (normalised) for quick lookup
+const ALL_DRAFT_NAMES = new Set(
+  TEAMS.flatMap(t => t.players.map(p => normStr(p.name)))
+);
+
 const TC = ["#1a4731","#2d6a4f","#6b7c3a","#c9a84c","#a0623a","#3a6b7c","#6b3a7c","#7c3a3a","#3a4a7c"];
 const PTS = {1:16,2:13,3:11,4:9,5:8,6:7,7:6,8:5,9:4,10:3,11:2,12:2,13:2,14:2,15:2};
+const MAX_PTS_POS = 15;
 
 let liveData = [];
 let playerMap = {};
-let sheetId = "1JrZKNO6vkoqXBSY9aoDtviZz6WVnprODF1mGKmqUHc0";
 let lastLoaded = null;
 let isConnected = false;
-
-// Published CSV URL (bypasses CORS — use File → Share → Publish to web → CSV)
 let PUBLISHED_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSU1qW-7kdt13BZaZ5O87DLGyPg-YnXvEevlBWWlgczthe5_zsQGYtB9FgfIp6LQ3lk5GLmDyvdlkmf/pub?gid=0&single=true&output=csv";
 
-// ── TABS ───────────────────────────────────────────────────────────────────────
+// ── SCREENSHOT (base64 embedded so it works on GitHub Pages) ──────────────────
+// We embed the uploaded screenshot as a data URL via fetch at load time
+(async function loadScreenshot() {
+  try {
+    // Try to load from same directory as the HTML file
+    const img = document.getElementById('screenshotImg');
+    const placeholder = document.getElementById('screenshotPlaceholder');
+    // We'll set the src to the filename — user should upload screenshot alongside index.html
+    img.src = 'espn-screenshot.jpeg';
+    img.onload = () => { img.style.display = 'block'; placeholder.style.display = 'none'; };
+    img.onerror = () => { placeholder.textContent = 'Highlight from the first player row to the last, stopping slightly before the right edge of the final column on the last row.'; };
+  } catch(e) {}
+})();
+
+// ── UTILS ─────────────────────────────────────────────────────────────────────
+function normStr(s) {
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+}
+function lname(n) { const p = normStr(n).split(' '); return p[p.length-1]; }
+
+function isDrafted(liveName) {
+  const nn = normStr(liveName);
+  const nl = lname(liveName);
+  return TEAMS.some(t => t.players.some(p => {
+    const pn = normStr(p.name), pl = lname(p.name);
+    return pn === nn || pl === nl;
+  }));
+}
+
+// ── TABS ──────────────────────────────────────────────────────────────────────
 function showPanel(id, btn) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('panel-' + id).classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
   if (btn) btn.classList.add('active');
 }
 
-// ── SHEET URL PARSING ──────────────────────────────────────────────────────────
-function extractSheetId(url) {
-  const m = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
-  return m ? m[1] : null;
+// ── SCORING ───────────────────────────────────────────────────────────────────
+function calcPts(pos, tc) {
+  if (!pos || pos > MAX_PTS_POS) return 0;
+  if (!tc || tc <= 1) return PTS[pos] || 0;
+  let s = 0, n = 0;
+  for (let i = pos; i < pos + tc && i <= MAX_PTS_POS; i++) { s += (PTS[i]||0); n++; }
+  return n ? s / n : 0;
 }
 
-function csvUrl(id) {
-  return `https://docs.google.com/spreadsheets/d/${id}/export?format=csv&gid=0`;
+function buildMap(arr) {
+  const pg = {};
+  arr.forEach(p => { if (p.pos && !p.cut) pg[p.pos] = (pg[p.pos]||0)+1; });
+  const m = {};
+  arr.forEach(p => {
+    const tc = pg[p.pos]||1;
+    const pp = p.cut ? 0 : calcPts(p.pos, tc);
+    const cb = (!p.cut && p.madecut) ? 1 : 0;
+    m[normStr(p.name)] = {...p, posPts:pp, cutBonus:cb, draftPts:Math.round((pp+cb)*100)/100};
+  });
+  return m;
 }
 
-// ── CSV PARSING ────────────────────────────────────────────────────────────────
-// Columns: Pos, Name, Total, Today, Thru, R1, R2, R3, R4, Total Shots
+// ── NAME MATCHING ─────────────────────────────────────────────────────────────
+function matchP(draftName, arr) {
+  const dn = normStr(draftName), dnL = lname(draftName);
+  let m = arr.find(p => normStr(p.name) === dn); if (m) return m;
+  m = arr.find(p => lname(p.name) === dnL); if (m) return m;
+  m = arr.find(p => normStr(p.name).includes(dnL) || dn.includes(lname(p.name)));
+  return m || null;
+}
+
+function getDraftTeams(liveName) {
+  const res = [];
+  TEAMS.forEach((t,ti) => {
+    t.players.forEach(tp => {
+      const lm = matchP(tp.name, liveData);
+      if (lm && normStr(lm.name) === normStr(liveName))
+        res.push({teamName:t.name, ti, pick:tp.pick});
+    });
+  });
+  return res;
+}
+
+// ── CSV PARSING ───────────────────────────────────────────────────────────────
 function parseCSV(text) {
   const lines = text.trim().split('\n').filter(l => l.trim());
   if (!lines.length) return [];
-
-  // Skip header row if present
   const startIdx = lines[0].toLowerCase().includes('name') || lines[0].toLowerCase().includes('pos') ? 1 : 0;
   const rows = [];
 
   for (let i = startIdx; i < lines.length; i++) {
     const cols = parseCSVLine(lines[i]);
     if (cols.length < 2) continue;
-
-    const posRaw = (cols[0] || '').trim();
-    const name   = (cols[1] || '').trim();
+    const posRaw = (cols[0]||'').trim();
+    const name = (cols[1]||'').trim();
     if (!name) continue;
 
-    // Parse position
     let pos = null, tied = false, cut = false;
     const posUp = posRaw.toUpperCase();
-    if (['CUT','MC','WD','DQ'].includes(posUp)) {
-      cut = true;
-    } else if (posUp.startsWith('T')) {
-      pos = parseInt(posUp.slice(1)) || null;
-      tied = true;
-    } else if (/^\d+$/.test(posUp)) {
-      pos = parseInt(posUp);
-    }
+    if (['CUT','MC','WD','DQ'].includes(posUp)) { cut = true; }
+    else if (posUp.startsWith('T')) { pos = parseInt(posUp.slice(1))||null; tied = true; }
+    else if (/^\d+$/.test(posUp)) { pos = parseInt(posUp); }
 
-    // Score parser: handles "-5", "+3", "E", "even", "--", ""
-    const parseScore = v => {
-      if (!v || v.trim() === '' || v.trim() === '--' || v.trim() === '-') return null;
+    const ps = v => {
+      if (!v||v.trim()===''||v.trim()==='--'||v.trim()==='-') return null;
       const s = v.trim().toUpperCase();
-      if (s === 'E' || s === 'EVEN') return 0;
-      const n = parseInt(s);
-      return isNaN(n) ? null : n;
+      if (s==='E'||s==='EVEN') return 0;
+      const n = parseInt(s); return isNaN(n)?null:n;
     };
 
-    const total   = parseScore(cols[2]);
-    const today   = parseScore(cols[3]);
-    const thru    = (cols[4] || '').trim() || '-';
-    const r1      = parseScore(cols[5]);
-    const r2      = parseScore(cols[6]);
-    const r3      = parseScore(cols[7]);
-    const r4      = parseScore(cols[8]);
+    const total=ps(cols[2]), today=ps(cols[3]);
+    const thru=(cols[4]||'').trim()||'-';
+    const r1=ps(cols[5]), r2=ps(cols[6]), r3=ps(cols[7]), r4=ps(cols[8]);
 
-    rows.push({ name, pos: cut ? null : pos, tied, tiedCount: 1,
-      total: cut ? null : total, today, thru, r1, r2, r3, r4,
-      madecut: !cut && (r2 !== null || (r1 !== null && thru === 'F')),
-      cut, country: '' });
+    rows.push({name, pos:cut?null:pos, tied, tiedCount:1,
+      total:cut?null:total, today, thru, r1, r2, r3, r4,
+      madecut: !cut && (r2!==null || (r1!==null && thru==='F')),
+      cut, country:''});
   }
 
-  // Compute tiedCounts
-  const pg = {};
-  rows.forEach(p => { if (p.pos) pg[p.pos] = (pg[p.pos] || 0) + 1; });
-  rows.forEach(p => { if (p.pos) { p.tiedCount = pg[p.pos]; if (p.tiedCount > 1) p.tied = true; } });
-
+  const pg={};
+  rows.forEach(p=>{ if(p.pos) pg[p.pos]=(pg[p.pos]||0)+1; });
+  rows.forEach(p=>{ if(p.pos){ p.tiedCount=pg[p.pos]; if(p.tiedCount>1) p.tied=true; } });
   return rows;
 }
 
 function parseCSVLine(line) {
-  // Handle quoted fields
-  const cols = [];
-  let cur = '', inQ = false;
-  for (let i = 0; i < line.length; i++) {
-    const c = line[i];
-    if (c === '"') { inQ = !inQ; }
-    else if (c === ',' && !inQ) { cols.push(cur); cur = ''; }
-    else { cur += c; }
+  const cols=[]; let cur='', inQ=false;
+  for(let i=0;i<line.length;i++){
+    const c=line[i];
+    if(c==='"'){inQ=!inQ;}
+    else if(c===','&&!inQ){cols.push(cur);cur='';}
+    else{cur+=c;}
   }
-  cols.push(cur);
-  return cols;
+  cols.push(cur); return cols;
 }
 
-// ── SCORING ────────────────────────────────────────────────────────────────────
-function calcPts(pos, tc) {
-  if (!pos || pos > 15) return 0;
-  if (!tc || tc <= 1) return PTS[pos] || 0;
-  let s = 0, n = 0;
-  for (let i = pos; i < pos + tc && i <= 15; i++) { s += (PTS[i] || 0); n++; }
-  return n ? s / n : 0;
-}
+// ── FORMAT ────────────────────────────────────────────────────────────────────
+function fmt(s){if(s===null||s===undefined)return '-';if(s===0)return 'E';return s>0?'+'+s:''+s;}
+function sc(s){if(s===null||s===undefined)return '';if(s<0)return 'u';if(s>0)return 'o';return 'ev';}
 
-function buildMap(arr) {
-  const pg = {};
-  arr.forEach(p => { if (p.pos && !p.cut) pg[p.pos] = (pg[p.pos] || 0) + 1; });
-  const m = {};
-  arr.forEach(p => {
-    const tc = pg[p.pos] || 1;
-    const pp = p.cut ? 0 : calcPts(p.pos, tc);
-    const cb = (!p.cut && p.madecut) ? 1 : 0;
-    m[p.name.toLowerCase().trim()] = { ...p, posPts: pp, cutBonus: cb, draftPts: Math.round((pp + cb) * 100) / 100 };
-  });
-  return m;
-}
-
-// ── NAME MATCHING ──────────────────────────────────────────────────────────────
-function lname(n) { const p = n.trim().toLowerCase().split(' '); return p[p.length - 1]; }
-
-function matchP(draftName, arr) {
-  const dn = draftName.toLowerCase().trim();
-  const dnL = lname(dn);
-  let m = arr.find(p => p.name.toLowerCase().trim() === dn); if (m) return m;
-  m = arr.find(p => lname(p.name) === dnL); if (m) return m;
-  // Handle accents / special chars (e.g. Åberg → Aberg, Højgaard → Hojgaard)
-  const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  m = arr.find(p => norm(lname(p.name)) === norm(dnL)); if (m) return m;
-  m = arr.find(p => norm(p.name).includes(norm(dnL)) || norm(dn).includes(norm(lname(p.name))));
-  return m || null;
-}
-
-function getDraftTeams(liveName) {
-  const res = [];
-  TEAMS.forEach((t, ti) => {
-    t.players.forEach(tp => {
-      const lm = matchP(tp.name, liveData);
-      if (lm && lm.name.toLowerCase().trim() === liveName.toLowerCase().trim())
-        res.push({ teamName: t.name, ti, pick: tp.pick });
-    });
-  });
-  return res;
-}
-
-// ── FORMAT ─────────────────────────────────────────────────────────────────────
-function fmt(s) { if (s === null || s === undefined) return '-'; if (s === 0) return 'E'; return s > 0 ? '+' + s : '' + s; }
-function sc(s) { if (s === null || s === undefined) return ''; if (s < 0) return 'u'; if (s > 0) return 'o'; return 'ev'; }
-
-// ── STATUS ─────────────────────────────────────────────────────────────────────
+// ── STATUS ────────────────────────────────────────────────────────────────────
 function updateStatus() {
-  const dot = document.getElementById('sdot');
-  const txt = document.getElementById('sbarTxt');
-  const time = lastLoaded ? lastLoaded.toLocaleTimeString('en-GB') : '';
-
-  if (isConnected && liveData.length) {
-    dot.className = 'sdot';
-    txt.textContent = 'Live from Google Sheet · Updated ' + time;
-  } else if (isConnected) {
-    dot.className = 'sdot amber';
-    txt.textContent = 'Sheet connected — no data rows found yet';
-  } else {
-    dot.className = 'sdot grey';
-    txt.textContent = 'Not connected — go to Setup tab';
-  }
-
-  const active = liveData.filter(p => p.pos).length;
-  document.getElementById('sbarRound').textContent = liveData.length ? `${active} players scored · ${liveData.length} in sheet` : '';
-  document.getElementById('hdrNote').textContent = liveData.length
-    ? 'Last updated: ' + time : 'No data — set up your Google Sheet in the Setup tab';
-
-  document.getElementById('statusDetail').textContent = isConnected
-    ? `✓ Connected to sheet ID: ${sheetId}. ${liveData.length} player rows loaded. Last refreshed: ${time || 'never'}.`
-    : 'Not connected. Paste your Google Sheet URL above and click Connect.';
+  const dot=document.getElementById('sdot'), txt=document.getElementById('sbarTxt');
+  const time=lastLoaded?lastLoaded.toLocaleTimeString('en-GB'):'';
+  if(isConnected&&liveData.length){dot.className='sdot';txt.textContent='Live from Google Sheet · Updated '+time;}
+  else if(isConnected){dot.className='sdot amber';txt.textContent='Sheet connected — no data rows found yet';}
+  else{dot.className='sdot grey';txt.textContent='Not connected — see How to Update tab';}
+  const active=liveData.filter(p=>p.pos).length;
+  document.getElementById('sbarRound').textContent=liveData.length?`${active} players scored · ${liveData.length} in sheet`:'';
+  document.getElementById('hdrNote').textContent=liveData.length?'Last updated: '+time:'No data yet';
+  document.getElementById('statusDetail').textContent=isConnected
+    ?`✓ Connected. ${liveData.length} player rows loaded. Last refreshed: ${time||'never'}.`
+    :'Not connected. Paste the published CSV URL below and click Reconnect.';
 }
 
-// ── LOAD FROM SHEET ────────────────────────────────────────────────────────────
+// ── LOAD SHEET ────────────────────────────────────────────────────────────────
 async function loadSheet() {
-  const btn = document.getElementById('refreshBtn');
-  if (btn) { btn.disabled = true; btn.textContent = 'Loading…'; }
-
+  const btn=document.getElementById('refreshBtn');
+  if(btn){btn.disabled=true;btn.textContent='Loading…';}
   try {
-    // Always use the published CSV URL — this is the one that bypasses CORS
-    const resp = await fetch(PUBLISHED_CSV_URL);
-    if (!resp.ok) throw new Error(`HTTP ${resp.status} — check the sheet is published to web as CSV`);
-    const text = await resp.text();
-    if (!text.trim()) throw new Error('Sheet appears empty — paste leaderboard data into the sheet first');
-
-    const parsed = parseCSV(text);
-    if (!parsed.length) throw new Error('No player rows found — make sure row 1 has headers and data starts from row 2');
-
-    liveData = parsed;
-    playerMap = buildMap(liveData);
-    lastLoaded = new Date();
-    isConnected = true;
-    updateStatus();
-    renderAll();
-
-    const msg = document.getElementById('connectMsg');
-    if (msg) { msg.textContent = `✓ Loaded ${parsed.length} rows`; msg.className = 'pmsg ok'; }
-
-  } catch (err) {
-    console.error(err);
-    isConnected = false;
-    updateStatus();
-    const msg = document.getElementById('connectMsg');
-    if (msg) { msg.textContent = `✗ ${err.message}`; msg.className = 'pmsg err'; }
-    const errHtml = `<div style="background:#fff0f0;border:1px solid #f5c6c6;border-radius:6px;padding:14px 18px;color:#c0392b;font-size:13px;margin-bottom:12px;">
-      <strong>Could not load sheet:</strong> ${err.message}<br><br>
-      Make sure the sheet is published via <strong>File → Share → Publish to web → CSV</strong> and that you have pasted data into the sheet from row 2 onwards.
-    </div>`;
-    document.getElementById('offContent').innerHTML = errHtml;
+    const resp=await fetch(PUBLISHED_CSV_URL);
+    if(!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const text=await resp.text();
+    if(!text.trim()) throw new Error('Sheet appears empty');
+    const parsed=parseCSV(text);
+    if(!parsed.length) throw new Error('No player rows found — check data starts from row 2');
+    liveData=parsed; playerMap=buildMap(liveData); lastLoaded=new Date(); isConnected=true;
+    updateStatus(); renderAll();
+    const msg=document.getElementById('connectMsg');
+    if(msg){msg.textContent=`✓ Loaded ${parsed.length} rows`;msg.className='pmsg ok';}
+  } catch(err) {
+    console.error(err); isConnected=false; updateStatus();
+    const msg=document.getElementById('connectMsg');
+    if(msg){msg.textContent=`✗ ${err.message}`;msg.className='pmsg err';}
+    document.getElementById('offContent').innerHTML=`<div style="background:#fff0f0;border:1px solid #f5c6c6;border-radius:6px;padding:14px 18px;color:#c0392b;font-size:13px;">
+      <strong>Could not load sheet:</strong> ${err.message}</div>`;
   }
-
-  if (btn) { btn.disabled = false; btn.textContent = '↻ Refresh'; }
+  if(btn){btn.disabled=false;btn.textContent='↻ Refresh';}
 }
 
-// ── CONNECT (update published URL if user pastes a new one) ───────────────────
 function connectSheet() {
-  const input = document.getElementById('sheetUrl').value.trim();
-  const msg = document.getElementById('connectMsg');
-
-  // Accept either a published CSV URL or a regular sheet URL
-  if (input.includes('/pub?') && input.includes('output=csv')) {
-    // It's already a published CSV URL — use it directly
-    PUBLISHED_CSV_URL = input;
+  const input=document.getElementById('sheetUrl').value.trim();
+  const msg=document.getElementById('connectMsg');
+  if(input.includes('/pub?')&&input.includes('output=csv')){
+    PUBLISHED_CSV_URL=input;
   } else {
-    msg.textContent = '✗ Please paste the published CSV URL (from File → Share → Publish to web → CSV), not the regular share link.';
-    msg.className = 'pmsg err';
-    return;
+    msg.textContent='✗ Please paste the published CSV URL (from File → Share → Publish to web → CSV).';
+    msg.className='pmsg err'; return;
   }
-
-  msg.textContent = ''; msg.className = 'pmsg';
+  msg.textContent='';msg.className='pmsg';
   loadSheet();
 }
 
-// ── RENDER ─────────────────────────────────────────────────────────────────────
-function renderAll() {
-  renderLegend();
-  renderOff();
-  renderDraft();
-  renderTeams();
+// ── RENDER ALL ────────────────────────────────────────────────────────────────
+function renderAll(){
+  renderLegend(); renderOff(); renderDraft(); renderTeams();
 }
 
 function renderLegend() {
-  const el = document.getElementById('legend');
-  el.innerHTML = '<span style="font-weight:500;margin-right:4px">Teams:</span>';
-  TEAMS.forEach((t, i) => el.innerHTML += `<span><span class="lsw" style="background:${TC[i]}"></span>${t.name}</span>`);
+  const el=document.getElementById('legend');
+  el.innerHTML='<span style="font-weight:500;margin-right:4px">Teams:</span>';
+  TEAMS.forEach((t,i)=>el.innerHTML+=`<span><span class="lsw" style="background:${TC[i]}"></span>${t.name}</span>`);
 }
 
+// ── OFFICIAL LEADERBOARD ──────────────────────────────────────────────────────
 function renderOff() {
-  const el = document.getElementById('offContent');
-  if (!liveData.length) {
-    el.innerHTML = `<div class="no-data-prompt"><div class="arrow">⛳</div><p>No data in your sheet yet. Paste the ESPN leaderboard into your Google Sheet, then click <strong>↻ Refresh</strong>.</p></div>`;
+  const el=document.getElementById('offContent');
+  if(!liveData.length){
+    el.innerHTML=`<div class="no-data-prompt"><div class="arrow">⛳</div><p>No data yet — see the <strong>How to Update</strong> tab for instructions.</p></div>`;
     return;
   }
 
-  const sorted = [...liveData].sort((a, b) => {
-    if (a.pos && b.pos) return a.pos - b.pos;
-    if (a.pos) return -1; if (b.pos) return 1;
+  // Sort: scored players by pos, then unscored, then cut
+  const sorted=[...liveData].sort((a,b)=>{
+    if(a.cut&&!b.cut) return 1; if(!a.cut&&b.cut) return -1;
+    if(a.pos&&b.pos) return a.pos-b.pos;
+    if(a.pos) return -1; if(b.pos) return 1;
     return a.name.localeCompare(b.name);
   });
 
-  let html = `<table class="lb"><thead><tr>
+  // Determine last position that scores points (pos <= MAX_PTS_POS)
+  // and the last position group that scores points
+  const scoringPositions = new Set(
+    sorted.filter(p=>!p.cut&&p.pos&&p.pos<=MAX_PTS_POS).map(p=>p.pos)
+  );
+  const lastScoringPos = scoringPositions.size ? Math.max(...scoringPositions) : 0;
+
+  // Group boundaries: for each row, does the NEXT row start a new position group?
+  // We draw a thick border on the last row of each position group (within scoring positions)
+  // and a red thick border between last scoring player and first non-scoring player
+
+  // Build position group end indices
+  const posGroupEnd = new Set(); // indices of rows that are the LAST in their pos group
+  for(let i=0;i<sorted.length;i++){
+    const p=sorted[i], next=sorted[i+1];
+    if(p.cut) continue; // no dividers in cut section
+    if(!next||next.cut||next.pos!==p.pos){
+      posGroupEnd.add(i);
+    }
+  }
+
+  // Which index is the last scoring player overall?
+  let lastScoringIdx = -1;
+  for(let i=0;i<sorted.length;i++){
+    if(!sorted[i].cut && sorted[i].pos && sorted[i].pos<=MAX_PTS_POS) lastScoringIdx=i;
+  }
+
+  let html=`<table class="lb"><thead><tr>
     <th style="width:46px">Pos</th><th>Player</th>
     <th class="r">Total</th><th class="r">Today</th><th class="c">Thru</th>
     <th class="c">R1</th><th class="c">R2</th><th class="c">R3</th><th class="c">R4</th>
     <th class="r">Draft Pts</th>
   </tr></thead><tbody>`;
 
-  let cutShown = false;
-  sorted.forEach(p => {
-    if (p.cut && !cutShown) { cutShown = true; html += `<tr class="cut-div"><td colspan="10">— Cut —</td></tr>`; }
-    const teams = getDraftTeams(p.name);
-    const badges = teams.map(d => `<span class="badge" style="background:${TC[d.ti]}">${d.teamName}</span>`).join('');
-    const posStr = !p.pos ? (p.cut ? 'CUT' : (p.thru === '-' ? '–' : '?')) : (p.tied ? 'T' + p.pos : '' + p.pos);
-    const pm = playerMap[p.name.toLowerCase().trim()] || {};
-    const pts = pm.draftPts !== undefined ? pm.draftPts.toFixed(1) : '–';
+  let cutShown=false;
+  sorted.forEach((p,i)=>{
+    if(p.cut&&!cutShown){
+      cutShown=true;
+      html+=`<tr class="cut-div"><td colspan="10">— Missed Cut —</td></tr>`;
+    }
 
-    html += `<tr class="${p.cut ? 'cut-row' : ''}">
+    const teams=getDraftTeams(p.name);
+    const drafted=teams.length>0;
+    const badges=teams.map(d=>`<span class="badge" style="background:${TC[d.ti]}">${d.teamName}</span>`).join('');
+    const posStr=!p.pos?(p.cut?'MC':(p.thru==='-'?'–':'?')):(p.tied?'T'+p.pos:''+p.pos);
+    const pm=playerMap[normStr(p.name)]||{};
+
+    // Points display: if undrafted, show greyed italic
+    let ptsHtml='–';
+    if(!p.cut&&p.pos){
+      const rawPts=pm.draftPts!==undefined?pm.draftPts:0;
+      if(rawPts>0){
+        if(drafted){
+          ptsHtml=`<span style="font-weight:600;color:var(--green)">${rawPts.toFixed(1)}</span>`;
+        } else {
+          // Undrafted player sharing a tied position — show greyed italic
+          ptsHtml=`<span class="pts-undrafted">${rawPts.toFixed(1)}</span>`;
+        }
+      }
+    }
+
+    // Row class
+    let rowClass = p.cut ? 'cut-row' : '';
+
+    // Border class: thick green between scoring pos groups, thick red after last scoring player
+    let borderClass='';
+    if(!p.cut && posGroupEnd.has(i)){
+      if(i===lastScoringIdx){
+        borderClass='grp-border-red'; // red line after last scoring group
+      } else if(p.pos && p.pos<=MAX_PTS_POS){
+        borderClass='grp-border'; // thick green line between scoring groups
+      }
+    }
+
+    const trClass=[rowClass,borderClass].filter(Boolean).join(' ');
+
+    html+=`<tr class="${trClass}">
       <td style="font-weight:600;color:var(--green)">${posStr}</td>
       <td><span style="font-weight:500">${p.name}</span>${badges}</td>
       <td class="r ${sc(p.total)}">${fmt(p.total)}</td>
       <td class="r ${sc(p.today)}">${fmt(p.today)}</td>
-      <td class="c" style="color:var(--muted)">${p.thru || '-'}</td>
+      <td class="c" style="color:var(--muted)">${p.thru||'-'}</td>
       <td class="c">${fmt(p.r1)}</td><td class="c">${fmt(p.r2)}</td>
       <td class="c">${fmt(p.r3)}</td><td class="c">${fmt(p.r4)}</td>
-      <td class="r" style="font-weight:600;color:var(--green)">${pts}</td>
+      <td class="r">${ptsHtml}</td>
     </tr>`;
   });
-  html += '</tbody></table>';
-  el.innerHTML = html;
+
+  html+='</tbody></table>';
+  el.innerHTML=html;
 }
 
+// ── DRAFT LEADERBOARD ─────────────────────────────────────────────────────────
 function renderDraft() {
-  const el = document.getElementById('draftContent');
-  if (!liveData.length) { el.innerHTML = '<div class="loading">No data yet.</div>'; return; }
+  const el=document.getElementById('draftContent');
+  if(!liveData.length){el.innerHTML='<div class="loading">No data yet.</div>';return;}
 
-  const scores = TEAMS.map((team, ti) => {
-    let total = 0;
-    const details = team.players.map(tp => {
-      const live = matchP(tp.name, liveData);
-      const pm = live ? (playerMap[live.name.toLowerCase().trim()] || {}) : {};
-      const pts = pm.draftPts || 0; total += pts;
-      return { tp, live, pts };
+  const scores=TEAMS.map((team,ti)=>{
+    let total=0;
+    const details=team.players.map(tp=>{
+      const live=matchP(tp.name,liveData);
+      const pm=live?(playerMap[normStr(live.name)]||{}):{};
+      const pts=pm.draftPts||0; total+=pts;
+      return{tp,live,pts};
     });
-    return { team, ti, total: Math.round(total * 10) / 10, details };
-  }).sort((a, b) => b.total - a.total);
+    return{team,ti,total:Math.round(total*10)/10,details};
+  }).sort((a,b)=>b.total-a.total);
 
-  let html = '<div class="dlb">';
-  scores.forEach((ts, rank) => {
-    const rc = rank === 0 ? 'r1c' : rank === 1 ? 'r2c' : rank === 2 ? 'r3c' : 'rnc';
-    const mini = ts.details.map(d => {
-      const l = d.live;
-      if (!l || l.thru === '-') return d.tp.name.split(' ').pop() + ' (–)';
-      const pos = l.cut ? 'CUT' : l.pos ? (l.tied ? 'T' + l.pos : '' + l.pos) : '–';
+  let html='<div class="dlb">';
+  scores.forEach((ts,rank)=>{
+    const rc=rank===0?'r1c':rank===1?'r2c':rank===2?'r3c':'rnc';
+    const mini=ts.details.map(d=>{
+      const l=d.live;
+      if(!l||l.thru==='-') return d.tp.name.split(' ').pop()+' (–)';
+      const pos=l.cut?'MC':l.pos?(l.tied?'T'+l.pos:''+l.pos):'–';
       return `${d.tp.name.split(' ').pop()} (${pos})`;
     }).join(' · ');
-    html += `<div class="drow" onclick="jumpTeam('${ts.team.name}')">
-      <div class="drank ${rc}">${rank + 1}</div>
+    html+=`<div class="drow" onclick="jumpTeam('${ts.team.name}')">
+      <div class="drank ${rc}">${rank+1}</div>
       <div style="flex:1"><div class="dname">${ts.team.name}</div><div class="dmini">${mini}</div></div>
       <div><div class="dpts" style="color:${TC[ts.ti]}">${ts.total.toFixed(1)}</div><div class="dpts-lbl">pts</div></div>
     </div>`;
   });
-  html += '</div>';
-  el.innerHTML = html;
+  html+='</div>';
+  el.innerHTML=html;
 }
 
+// ── TEAMS ─────────────────────────────────────────────────────────────────────
 function renderTeams() {
-  const el = document.getElementById('teamsContent');
-  if (!liveData.length) { el.innerHTML = '<div class="loading">No data yet.</div>'; return; }
+  const el=document.getElementById('teamsContent');
+  if(!liveData.length){el.innerHTML='<div class="loading">No data yet.</div>';return;}
 
-  let html = '<div class="tgrid">';
-  TEAMS.forEach((team, ti) => {
-    let total = 0, rows = '';
-    team.players.forEach(tp => {
-      const live = matchP(tp.name, liveData);
-      const pm = live ? (playerMap[live.name.toLowerCase().trim()] || {}) : {};
-      const pts = pm.draftPts || 0; total += pts;
-      const ns = !live || live.thru === '-', cut = live && live.cut;
-      const pos = !live ? '?' : cut ? 'CUT' : !live.pos ? '–' : (live.tied ? 'T' + live.pos : '' + live.pos);
-      const topar = live ? live.total : null;
-      const pcol = cut ? '#c0392b' : ns ? 'var(--muted)' : 'var(--dark)';
-      rows += `<div class="tprow">
+  let html='<div class="tgrid">';
+  TEAMS.forEach((team,ti)=>{
+    let total=0, rows='';
+    team.players.forEach(tp=>{
+      const live=matchP(tp.name,liveData);
+      const pm=live?(playerMap[normStr(live.name)]||{}):{};
+      const pts=pm.draftPts||0; total+=pts;
+      const ns=!live||live.thru==='-', cut=live&&live.cut;
+      const pos=!live?'?':cut?'MC':!live.pos?'–':(live.tied?'T'+live.pos:''+live.pos);
+      const topar=live?live.total:null;
+      const pcol=cut?'#c0392b':ns?'var(--muted)':'var(--dark)';
+      const mcClass=cut?'mc-row':'';
+      rows+=`<div class="tprow ${mcClass}">
         <span class="pick">${tp.pick}</span>
         <span class="tpname">${tp.name}</span>
         <span class="tppos" style="color:${pcol}">${pos}</span>
-        <span class="tpscore ${sc(topar)}">${ns ? '' : fmt(topar)}</span>
-        <span class="tppts" style="color:${pts > 0 ? TC[ti] : 'var(--muted)'}">${pts > 0 ? pts.toFixed(1) : '–'}</span>
+        <span class="tpscore ${sc(topar)}">${ns?'':fmt(topar)}</span>
+        <span class="tppts" style="color:${pts>0?TC[ti]:'var(--muted)'}">${pts>0?pts.toFixed(1):'–'}</span>
       </div>`;
     });
-    html += `<div class="tcard" id="tc-${team.name}">
+    html+=`<div class="tcard" id="tc-${team.name}">
       <div class="tcard-hdr" style="background:${TC[ti]}">
         <span class="tcard-name">${team.name}</span>
         <span class="tcard-pts">${total.toFixed(1)}<span>pts</span></span>
       </div>${rows}</div>`;
   });
-  html += '</div>';
-  el.innerHTML = html;
+  html+='</div>';
+  el.innerHTML=html;
 }
 
-function jumpTeam(name) {
-  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === 2));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+function jumpTeam(name){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===2));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-teams').classList.add('active');
-  setTimeout(() => { const c = document.getElementById('tc-' + name); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 80);
+  setTimeout(()=>{const c=document.getElementById('tc-'+name);if(c) c.scrollIntoView({behavior:'smooth',block:'center'});},80);
 }
 
-// ── INIT ───────────────────────────────────────────────────────────────────────
+// ── INIT ──────────────────────────────────────────────────────────────────────
 updateStatus();
 renderLegend();
-// Auto-load on start using the pre-filled sheet ID
 loadSheet();
-// Auto-refresh every 3 minutes
-setInterval(loadSheet, 3 * 60 * 1000);
+setInterval(loadSheet, 3*60*1000);
 </script>
 </body>
 </html>
