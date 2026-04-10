@@ -77,26 +77,15 @@
   .lsw{width:11px;height:11px;border-radius:2px;display:inline-block;margin-right:3px;vertical-align:middle;}
 
   /* DRAFT LEADERBOARD */
-  .dlb{display:flex;flex-direction:column;gap:8px;}
-  .drow{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;transition:all 0.18s;}
+  .dlb{display:flex;flex-direction:column;gap:6px;}
+  .drow{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:11px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all 0.18s;}
   .drow:hover{border-color:var(--green-light);box-shadow:0 2px 8px rgba(26,71,49,0.1);}
-  .drow-header{padding:11px 14px;display:flex;align-items:center;gap:12px;}
   .drank{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;width:34px;flex-shrink:0;text-align:center;}
   .r1c{color:var(--gold);} .r2c{color:#8a8a8a;} .r3c{color:#a0623a;} .rnc{color:var(--green);}
   .dname{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--green);}
+  .dmini{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.5;}
   .dpts{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;min-width:55px;text-align:right;}
   .dpts-lbl{font-size:10px;color:var(--muted);text-align:right;letter-spacing:0.06em;text-transform:uppercase;}
-  /* draft player list within each team row */
-  .dplayers{border-top:1px solid var(--border);}
-  .dplayer-row{display:flex;align-items:center;padding:5px 14px;border-bottom:1px solid var(--border);font-size:12px;gap:8px;}
-  .dplayer-row:last-child{border-bottom:none;}
-  .dplayer-pos{width:36px;flex-shrink:0;font-weight:600;color:var(--green);font-size:11px;}
-  .dplayer-name{flex:1;font-weight:500;}
-  .dplayer-name.safe{color:var(--green-mid);font-weight:600;}
-  .dplayer-name.cut{color:var(--red);}
-  .dplayer-name.ns{color:var(--dark);}
-  .dplayer-score{min-width:30px;text-align:right;font-size:11px;font-weight:600;}
-  .dplayer-pts{min-width:34px;text-align:right;font-family:'Playfair Display',serif;font-weight:700;font-size:13px;}
   .asterisk-note{font-size:11px;color:var(--muted);margin-bottom:8px;font-style:italic;}
 
   /* TEAMS */
@@ -723,7 +712,7 @@ function renderDraft(){
       <div class="drank ${rc}">${rank+1}</div>
       <div style="flex:1">
         <div class="dname">${ts.team.name}</div>
-        <div class="dmini" style="flex-wrap:wrap;display:flex;gap:2px 0">${mini}</div>
+        <div class="dmini">${mini}</div>
       </div>
       <div><div class="dpts" style="color:${TC[ts.ti]}">${ts.total.toFixed(1)}</div><div class="dpts-lbl">pts</div></div>
     </div>`;
