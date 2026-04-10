@@ -308,7 +308,7 @@ const PTS={1:16,2:13,3:11,4:9,5:8,6:7,7:6,8:5,9:4,10:3,11:2,12:2,13:2,14:2,15:2}
 const MAX_PTS_POS=15;
 
 let liveData=[], projCutText=null, projCutScore=null, playerMap={};
-let lastLoaded=null, isConnected=false;
+let lastLoaded=null, sheetLastEdited=null, isConnected=false;
 let PUBLISHED_CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vSU1qW-7kdt13BZaZ5O87DLGyPg-YnXvEevlBWWlgczthe5_zsQGYtB9FgfIp6LQ3lk5GLmDyvdlkmf/pub?gid=0&single=true&output=csv";
 
 // Screenshot loader
@@ -400,7 +400,17 @@ function parseCSV(text){
   const lines=text.trim().split('\n').filter(l=>l.trim());
   if(!lines.length) return [];
   const rows=[];
-  projCutText=null; projCutScore=null;
+  projCutText=null; projCutScore=null; sheetLastEdited=null;
+
+  // Always try to read header row (row 1) for M1 timestamp at cols[12]
+  const headerCols=parseCSVLine(lines[0]);
+  const tsRaw=(headerCols[12]||'').trim();
+  if(tsRaw){
+    // =NOW() outputs e.g. "10/04/2026 14:32:07" — parse it as a Date
+    const d=new Date(tsRaw.replace(/(\d{2})\/(\d{2})\/(\d{4})/,'$3-$2-$1'));
+    if(!isNaN(d.getTime())) sheetLastEdited=d;
+  }
+
   const startIdx=lines[0].toLowerCase().includes('name')||lines[0].toLowerCase().includes('pos')?1:0;
 
   for(let i=startIdx;i<lines.length;i++){
@@ -467,15 +477,23 @@ function sc(s){if(s===null||s===undefined)return '';if(s<0)return 'u';if(s>0)ret
 // ── STATUS ────────────────────────────────────────────────────────────────────
 function updateStatus(){
   const dot=document.getElementById('sdot'),txt=document.getElementById('sbarTxt');
-  const time=lastLoaded?lastLoaded.toLocaleTimeString('en-GB'):'';
-  if(isConnected&&liveData.length){dot.className='sdot';txt.textContent='Live from Google Sheet · Fetched '+time;}
+  const fetchTime=lastLoaded?lastLoaded.toLocaleTimeString('en-GB'):'';
+  // Prefer the sheet's own timestamp (M1) over the app's fetch time
+  const editTime=sheetLastEdited
+    ?sheetLastEdited.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'})
+    :null;
+  const displayTime=editTime||fetchTime;
+
+  if(isConnected&&liveData.length){dot.className='sdot';txt.textContent='Live from Google Sheet · Updated '+displayTime;}
   else if(isConnected){dot.className='sdot amber';txt.textContent='Sheet connected — no data rows found yet';}
   else{dot.className='sdot grey';txt.textContent='Not connected — see How to Update tab';}
   const active=liveData.filter(p=>p.pos).length;
   document.getElementById('sbarRound').textContent=liveData.length?`${active} players scored · ${liveData.length} in sheet`:'';
-  document.getElementById('hdrNote').textContent=liveData.length?'Last fetched: '+time:'No data yet';
+  document.getElementById('hdrNote').textContent=liveData.length
+    ?(editTime?'Sheet updated: '+editTime:'Last fetched: '+fetchTime)
+    :'No data yet';
   document.getElementById('statusDetail').textContent=isConnected
-    ?`✓ Connected. ${liveData.length} player rows loaded. Last fetched: ${time||'never'}.`
+    ?`✓ Connected. ${liveData.length} player rows loaded. Sheet updated: ${displayTime||'never'}.`
     :'Not connected. Click Reconnect below.';
 }
 
@@ -669,7 +687,7 @@ function renderDraft(){
       const pts=pm.draftPts||0;total+=pts;
       return{tp,live,pm,pts};
     });
-    // Sort by leaderboard position: scored first (by pos), then not started, then cut
+    // Sort by leaderboard position: scored first (by pos asc), then not started, then cut
     details.sort((a,b)=>{
       const al=a.live,bl=b.live;
       const acut=al&&al.cut,bcut=bl&&bl.cut;
@@ -684,38 +702,30 @@ function renderDraft(){
   let html='<div class="dlb">';
   scores.forEach((ts,rank)=>{
     const rc=rank===0?'r1c':rank===1?'r2c':rank===2?'r3c':'rnc';
-    let playerRows='';
-    ts.details.forEach(d=>{
+
+    // Build compact one-line player summary, ordered by position (already sorted above)
+    const mini=ts.details.map(d=>{
       const l=d.live;
       const ns=!l||isTime(l.thru);
       const cut=l&&l.cut;
       if(ns&&!cut) anyNotStarted=true;
 
-      const posStr=!l?'?':cut?'MC':!l.pos?'–':(l.tied?'T'+l.pos:''+l.pos);
-
-      // Cut status colouring
-      const cs=l?cutStatus(l):'unknown';
-      const nameClass=cut?'cut':(cs==='safe'?'safe':'ns');
-
+      const pos=cut?'MC':l&&l.pos?(l.tied?'T'+l.pos:''+l.pos):'–';
       const asterisk=(ns&&!cut)?'*':'';
-      const scoreStr=(!l||l.total===null)?'':fmt(l.total);
-      const ptsStr=d.pts>0?d.pts.toFixed(1):'–';
+      const cs=l?cutStatus(l):'unknown';
+      // Green if safe/on cut, red if below cut or missed cut, default otherwise
+      const col=cut?'var(--red)':(cs==='safe'?'var(--green-mid)':cs==='cut'?'var(--red)':'inherit');
 
-      playerRows+=`<div class="dplayer-row">
-        <span class="dplayer-pos">${posStr}</span>
-        <span class="dplayer-name ${nameClass}">${d.tp.name}${asterisk}</span>
-        <span class="dplayer-score ${sc(l?l.total:null)}">${scoreStr}</span>
-        <span class="dplayer-pts" style="color:${d.pts>0?TC[ts.ti]:'var(--muted)'}">${ptsStr}</span>
-      </div>`;
-    });
+      return `<span style="color:${col};white-space:nowrap">${d.tp.name.split(' ').pop()}${asterisk} (${pos})</span>`;
+    }).join('<span style="color:var(--muted)"> · </span>');
 
     html+=`<div class="drow" onclick="jumpTeam('${ts.team.name}')">
-      <div class="drow-header">
-        <div class="drank ${rc}">${rank+1}</div>
-        <div style="flex:1"><div class="dname">${ts.team.name}</div></div>
-        <div><div class="dpts" style="color:${TC[ts.ti]}">${ts.total.toFixed(1)}</div><div class="dpts-lbl">pts</div></div>
+      <div class="drank ${rc}">${rank+1}</div>
+      <div style="flex:1">
+        <div class="dname">${ts.team.name}</div>
+        <div class="dmini" style="flex-wrap:wrap;display:flex;gap:2px 0">${mini}</div>
       </div>
-      <div class="dplayers">${playerRows}</div>
+      <div><div class="dpts" style="color:${TC[ts.ti]}">${ts.total.toFixed(1)}</div><div class="dpts-lbl">pts</div></div>
     </div>`;
   });
   html+='</div>';
@@ -745,7 +755,7 @@ function renderTeams(){
 
       // Name colour based on cut status
       const cs=live?cutStatus(live):'unknown';
-      const nameClass=cut?'missed':(cs==='safe'?'safe':'');
+      const nameClass=cut?'missed':(cs==='safe'?'safe':cs==='cut'?'missed':'');
 
       rows+=`<div class="tprow ${mcClass}">
         <span class="pick">${tp.pick}</span>
