@@ -363,11 +363,31 @@ function buildMap(arr){
 
 // ── NAME MATCHING ─────────────────────────────────────────────────────────────
 function matchP(draftName,arr){
-  const dn=normStr(draftName),dnL=lname(draftName);
+  const dn=normStr(draftName), dnL=lname(draftName);
+  const dnParts=dn.split(' ');
+  const dnFirst=dnParts[0];
+
+  // 1. Exact full name match
   let m=arr.find(p=>normStr(p.name)===dn); if(m) return m;
-  m=arr.find(p=>lname(p.name)===dnL); if(m) return m;
-  m=arr.find(p=>normStr(p.name).includes(dnL)||dn.includes(lname(p.name)));
-  return m||null;
+
+  // 2. Last name match — only use if unambiguous (exactly one live player has that last name)
+  const lastNameMatches=arr.filter(p=>lname(p.name)===dnL);
+  if(lastNameMatches.length===1){ return lastNameMatches[0]; }
+
+  // 3. Multiple players share the last name — require first name match too
+  if(lastNameMatches.length>1){
+    m=lastNameMatches.find(p=>{
+      const pParts=normStr(p.name).split(' ');
+      return pParts[0]===dnFirst;
+    });
+    if(m) return m;
+  }
+
+  // 4. Broad contains match — only when last name is unambiguous across full arr
+  const broadMatches=arr.filter(p=>normStr(p.name).includes(dnL)||dn.includes(lname(p.name)));
+  if(broadMatches.length===1) return broadMatches[0];
+
+  return null;
 }
 
 function getDraftTeams(liveName){
@@ -702,8 +722,10 @@ function renderDraft(){
       const pos=cut?'MC':l&&l.pos?(l.tied?'T'+l.pos:''+l.pos):'–';
       const asterisk=(ns&&!cut)?'*':'';
       const cs=l?cutStatus(l):'unknown';
-      // Green if safe/on cut, red if below cut or missed cut, default otherwise
-      const col=cut?'var(--red)':(cs==='safe'?'var(--green-mid)':cs==='cut'?'var(--red)':'inherit');
+      // Green = in scoring positions (1-15), red = missed cut, neutral = made cut but outside top 15
+      const scoring = l && !l.cut && l.pos && l.pos <= MAX_PTS_POS;
+      const missedCut = cut || cs === 'cut';
+      const col = scoring ? 'var(--green-mid)' : missedCut ? 'var(--red)' : 'inherit';
 
       return `<span style="color:${col};white-space:nowrap">${d.tp.name.split(' ').pop()}${asterisk} (${pos})</span>`;
     }).join('<span style="color:var(--muted)"> · </span>');
