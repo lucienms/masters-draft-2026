@@ -355,7 +355,7 @@ function buildMap(arr){
   arr.forEach(p=>{
     const tc=pg[p.pos]||1;
     const pp=p.cut?0:calcPts(p.pos,tc);
-    const cb=(!p.cut&&p.madecut)?1:0;
+    const cb=(!p.cut&&p.madecut&&(!p.pos||p.pos>MAX_PTS_POS))?1:0;
     m[normStr(p.name)]={...p,posPts:pp,cutBonus:cb,draftPts:Math.round((pp+cb)*100)/100};
   });
   return m;
