@@ -710,7 +710,11 @@ function renderDraft(){
 
   let html='<div class="dlb">';
   scores.forEach((ts,rank)=>{
-    const rc=rank===0?'r1c':rank===1?'r2c':rank===2?'r3c':'rnc';
+    // Compute display rank accounting for ties
+    const displayRank = rank === 0 ? 1 : (scores[rank].total === scores[rank-1].total ? scores.findIndex(s=>s.total===ts.total)+1 : rank+1);
+    const tied = scores.filter(s=>s.total===ts.total).length>1;
+    const rankStr = (tied?'T':'')+displayRank;
+    const rc=displayRank===1?'r1c':displayRank===2?'r2c':displayRank===3?'r3c':'rnc';
 
     // Build compact one-line player summary, ordered by position (already sorted above)
     const mini=ts.details.map(d=>{
@@ -722,16 +726,17 @@ function renderDraft(){
       const pos=cut?'MC':l&&l.pos?(l.tied?'T'+l.pos:''+l.pos):'–';
       const asterisk=(ns&&!cut)?'*':'';
       const cs=l?cutStatus(l):'unknown';
-      // Green = in scoring positions (1-15), red = missed cut, neutral = made cut but outside top 15
+      // Green+bold = scoring positions (1-15), light grey = made cut outside top 15, red = missed cut
       const scoring = l && !l.cut && l.pos && l.pos <= MAX_PTS_POS;
       const missedCut = cut || cs === 'cut';
-      const col = scoring ? 'var(--green-mid)' : missedCut ? 'var(--red)' : 'inherit';
+      const col = scoring ? 'var(--green-mid)' : missedCut ? 'var(--red)' : '#aaa';
+      const fw = scoring ? '700' : '400';
 
-      return `<span style="color:${col};white-space:nowrap">${d.tp.name.split(' ').pop()}${asterisk} (${pos})</span>`;
+      return `<span style="color:${col};font-weight:${fw};white-space:nowrap">${d.tp.name.split(' ').pop()}${asterisk} (${pos})</span>`;
     }).join('<span style="color:var(--muted)"> · </span>');
 
     html+=`<div class="drow" onclick="jumpTeam('${ts.team.name}')">
-      <div class="drank ${rc}">${rank+1}</div>
+      <div class="drank ${rc}">${rankStr}</div>
       <div style="flex:1">
         <div class="dname">${ts.team.name}</div>
         <div class="dmini">${mini}</div>
